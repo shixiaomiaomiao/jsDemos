@@ -1,0 +1,14 @@
+/* CSS Document */
+*{margin:0px;padding:0px;}
+li{margin:0px;padding:0px;list-style-type:none;}
+body{background:url("images of cool-clock/bg.png");}
+#container{margin:180px auto;width:500px;height:300px;}
+#title a {display:block;}
+#title a img{display:block;margin:0px auto;}
+#date{margin:80px auto;margin-left:60px;}
+#date li{float:left;overflow:hidden;}
+#date li img{display:block; margin-left:6px;}
+#time{margin:0px auto;margin-left:60px;clear:left;}
+#time li{float:left; overflow:hidden;}
+#time li img{display:block;margin-top:30px;margin-left:6px;}
+

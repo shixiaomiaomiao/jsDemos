@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/dtd/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8"></meta>
+<title>淘宝幻灯片</title>
+<style>
+*{margin:0px;padding:0px;}
+li,ul {list-style-type:none;}
+body {background:#20c0c0; }
+#container {width:470px; height:150px;margin:90px auto;position:relative;overflow:hidden;}
+.img {position:relative;top:0px;}
+.img li{width:470px;height:150px;margin:0px;}
+.index {width:125px; height:20px;position:absolute;right:8px;display:block;bottom:10px;}
+.index li{width:18px;height:18px;display:block;float:left;z-index:10;background: cornsilk;margin-left:5px;border:1px solid red;color:red;text-align:center;font-family:"黑体";font-size:14px;cursor:pointer;}
+.index .active{background:orange;color:#fff;font-weight:bold;}
+</style>
+<script>
+function startMove(obj,json,fun)
+{
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function()
+	{
+		var allStop = true;
+		var cur = 0;
+		var speed = 0;
+		for (var attr in json)
+		{
+			if (attr == "opacity")
+			{
+				cur = Math.round(parseFloat(getStyle(obj,attr))*100);
+			}
+			else
+			{
+				cur = parseInt(getStyle(obj,attr));
+			}
+			speed = (json[attr]-cur)/6;
+			speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+			if (cur != json[attr])
+			{
+				allStop = false;
+			}
+			if (attr == "opacity")
+			{
+				obj.style.filter = "alpha(opacity"+(cur+speed)+")";
+				obj.style.opacity = (cur+speed)/100;
+			}
+			else
+			{
+				obj.style[attr] = cur + speed + "px";
+			}
+		}
+		if (allStop)
+		{
+			clearInterval(obj.timer);
+			if (fun)
+			{
+				fun();
+			}
+		}
+	}
+	,30)
+}
+function getStyle(obj,name)
+{
+	if(obj.currentStyle)
+	{
+		return obj.currentStyle[name];
+	}
+	else
+	{
+		return getComputedStyle(obj,false)[name];
+	}
+}
+window.onload = function()
+{
+	var oDiv = document.getElementById("container");
+	var oUl = oDiv.getElementsByTagName("ul");
+	var oImg = oUl[0].getElementsByTagName("li");
+	var oLi = oUl[1].getElementsByTagName("li");
+	var iHeight = oImg[0].offsetHeight;
+	var nowIndex = 0;
+	var timer = null;
+	//对于每个数字小方块加上事件
+	for (var i = 0 ; i < oLi.length ; i++)
+	{
+		oLi[i].index = i;
+		oLi[i].onclick = function()
+		{
+			nowIndex = this.index;
+			tab();		
+		}
+	}
+	oDiv.onmouseover = function()
+	{
+		clearInterval(timer);
+	}
+	oDiv.onmouseout = function()
+	{
+		timer = setInterval(function()
+		{
+			tab();
+		},1500)
+	}
+
+	clearInterval(timer);
+	timer = setInterval(function()
+	{
+		tab();
+	},1500)
+	function tab()
+	{
+		var iTop = -(nowIndex * iHeight);
+		startMove(oUl[0],{"top":iTop},false);
+		for (var j = 0 ; j < oLi.length ; j++)
+		{
+			oLi[j].className = "";
+		}
+		oLi[nowIndex].className = "active"; 
+		nowIndex += 1;			
+		if (nowIndex == oLi.length)
+		{
+			nowIndex = 0;
+		}
+	}
+	
+}
+</script>
+</head>
+<body>
+<div id = "container">
+	<ul class = "img">
+		<li><img src = "http://sandbox.runjs.cn/uploads/rs/108/brix4lii/1-taobao (1).jpg"></li>
+		<li><img src = "http://sandbox.runjs.cn/uploads/rs/108/brix4lii/1-taobao (2).jpg"></li>
+		<li><img src = "http://sandbox.runjs.cn/uploads/rs/108/brix4lii/1-taobao (3).jpg"></li>
+		<li><img src = "http://sandbox.runjs.cn/uploads/rs/108/brix4lii/1-taobao (4).jpg"></li>
+		<li><img src = "http://sandbox.runjs.cn/uploads/rs/108/brix4lii/1-taobao (5).jpg"></li>
+	</ul>
+	<ul class = "index">
+		<li class = "active">1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	</ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html ; charset = utf-8"></meta>
+<style>
+#container {width:500px;height:300px;margin:50px auto;}
+</style>
+<script>
+window.onload = function ()
+{
+	var oTxt = document.getElementById("txt1");
+	var oBt1 = document.getElementById("bt1");
+	var newWin = null ;
+	
+	oBt1.onclick = function()
+	{
+		run();
+		window.close();
+	}
+	
+	document.onkeydown = function( ev )
+	{
+		var oEvent = ev || event ;
+		if ( ev.keyCode == 13 )
+		{
+			run();
+		}
+	}
+	
+	function run()
+	{
+		newWin = window.open("about:blank","_blank");  //以新页面的形式打开空白页
+		newWin.document.write ( oTxt.value );
+		oTxt.value = "";
+	}
+}
+</script>
+</head>
+<body>
+<div id = "container" >
+	<textarea id = "txt1" cols = "40" rows = "12"></textarea></br>
+	<input id = "bt1" type = "button" value = "运行"/>
+</div>
+</body>
+</html>

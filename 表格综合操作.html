@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD//XHTML1.0 Strict" "http：//www.w3.org/TR/xhtml/dtd/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html;charset = utf-8" ></meta>
+<title>表格搜索</title>
+<style>
+body{background:#999;}
+#container {width:510px;margin:20px auto;}
+#search {width:200px ; height: 20px;}
+#table {margin-top:10px;text-align:center;clear:both;}
+#choice {margin-top:10px;font-size:12px;margin-left:10px;}
+#add {border:1px solid #000;width:500px;height:20px;padding:5px;}
+</style>
+<script>
+window.onload = function()
+{
+	var oTab = document.getElementById('table');
+	var oHigh = document.getElementById("highlight");
+	var oBtSearch = document.getElementById("bt1");
+	var oBtLow = document.getElementById("low");
+	var oBtBlur = document.getElementById('blur');
+	var oBtM = document.getElementById('multiple');
+	var oTxt = document.getElementById('search');
+	
+	var nowId = oTab.tBodies[0].rows.length;
+	
+	//隔行变色
+	for (var i = 0; i < nowId ; i ++ )
+	{
+		if ( i%2 )
+		{
+			oTab.tBodies[0].rows[i].style.background = "#ffffa0 ";
+		}
+		oTab.tBodies[0].rows[i].onmouseover = function()
+		{
+			this.oldColor = this.style.background;
+			this.style.background = "#40ff00 ";
+		}
+		oTab.tBodies[0].rows[i].onmouseout = function()
+		{
+			this.style.background = this.oldColor;
+		}
+	}
+	
+	/*删除操作*/
+	var a = oTab.tBodies[0].getElementsByTagName('a');
+	for ( var i = 0 ; i < a.length ; i ++ )
+	{
+	  a[i].onclick = function()
+	  {
+		oTab.tBodies[0].removeChild(this.parentNode.parentNode);
+	  }
+	}
+	
+	//添加元素
+	var oAddBt = document.getElementById("addBt");
+	var oAddTxt = document.getElementById("addTxt");
+	var oAddAge = document.getElementById("addAge");
+	
+	//只接受数字的文本框
+	oAddAge.onkeydown = function(ev)
+	{	
+		var oEvent = ev || event;
+		//alert(ev.keyCode);
+		if ((ev.keyCode != 37)&&(ev.keyCode != 39)&&(ev.keyCode != 8)&&(ev.keyCode < 48 || ev.keyCode > 57))
+		{
+			return false;
+		}
+	}
+	oAddBt.onclick = function()
+	{
+		var newName = oAddTxt.value;
+		var newAge = oAddAge.value;
+		if (!(newName||newAge ))
+		{
+			alert("请先填写信息！");
+		}
+		else if ( !newName )
+		{
+			alert("请填写姓名");
+		}
+		else if ( !newAge )
+		{
+			alert("请填写年龄");
+		}
+		else if ( isNaN(newAge) )
+		{
+			alert("请在年龄中输入数字！");
+		}
+		else
+		{
+			//创建新的行
+			var oTr = document.createElement("tr");
+			
+			//创建新的ID
+			var oTd = document.createElement("td");
+			oTd.innerHTML = ++nowId ;
+			
+			oTr.appendChild(oTd);
+			
+			//创建新的姓名
+			var oTd = document.createElement("td");
+			oTd.innerHTML = newName ;
+			oTr.appendChild(oTd);
+			
+			//创建新的年龄
+			var oTd = document.createElement("td");
+			oTd.innerHTML = newAge ;
+			oTr.appendChild(oTd);
+			
+			//创建新的删除操作
+			var oTd = document.createElement("td");
+			oTd.innerHTML = "<a href = 'javascript:;' >删除</a>";
+			oTd.children[0].onclick = function()
+			{
+				oTab.tBodies[0].removeChild(this.parentNode.parentNode);
+			}
+			oTr.appendChild(oTd);
+			//判断id是否为单数，单数背景色为黄色
+			if ( !(nowId % 2))
+			{
+				oTr.style.background = "#ffffa0 ";
+			}
+			oTab.tBodies[0].appendChild(oTr);
+			
+		}
+	}
+	
+	//搜素按钮增加事件
+	oBtSearch.onclick = function()
+	{
+		var input = [oTxt.value];		
+		//是否进行多关键词分割
+		if (oBtM.checked)
+		{
+			input = input[0].split (' ');
+		}
+		for ( var i = 0 ; i < oTab.tBodies[0].rows.length ; i++)
+		{	
+			oTab.tBodies[0].rows[i].style.background = "";
+			oTab.tBodies[0].rows[i].style.visibility = "visible";
+			var equal = false;
+			for (var j = 0; j < input.length ; j++ )
+			{
+				var outTxt = input[j];
+				var inTxt = oTab.tBodies[0].rows[i].cells[1].innerHTML;
+				
+				//是否忽略大小写
+				if (oBtLow.checked)
+				{
+					outTxt = outTxt.toLowerCase();
+					inTxt = inTxt.toLowerCase();
+				}
+				//模糊搜索
+				if (oBtBlur.checked)
+				{
+					if (inTxt.search(outTxt) != -1)
+						{
+							equal = true;
+							
+						}
+				}
+				else
+				{
+					if (outTxt == inTxt)
+						{
+							equal = true;		
+						}
+				}
+
+			}
+		if (equal)
+		{
+			if (oHigh.checked)
+			{
+				oTab.tBodies[0].rows[i].style.background = "#ff4060 ";
+			}
+			else
+			{
+				oTab.tBodies[0].rows[i].style.visibility = "visible";
+			}
+		}
+		else
+		{
+			if (oHigh.checked)
+			{
+				oTab.tBodies[0].rows[i].style.background = "";
+			}
+			else
+			{
+				oTab.tBodies[0].rows[i].style.visibility = "hidden";
+			}
+		}
+			
+		}
+		//oTxt.value = "";
+	}
+	
+}
+</script>
+</head>
+<body>
+<div id = "container">
+	姓名：<input type = "text" id = "search">
+	<input type = "button" value = "搜索" id = "bt1">
+	<input type = "radio" id = "highlight" name = "kind" checked = "true">高亮
+	<input type = "radio" name = "kind">筛选
+	<div id = "choice">
+		<input type = "checkbox"  checked = "true" id = "low">忽略大小写
+		<input type = "checkbox"  checked = "true" id = "blur">模糊搜索
+		<input type = "checkbox"  checked = "true" id = "multiple">多关键词
+	</div>
+	<div id = "add">
+		姓名:<input type = "text" id = "addTxt"/>
+		年龄:<input type = "text" id = "addAge"/>
+		<input type = "button" id = "addBt" value = "添加"/>
+	</div>
+	<table id = "table" border = "1" width = "500" >
+		<thead>
+			<td>ID</td>
+			<td>姓名</td>
+			<td>年龄</td>
+			<td>操作</td>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>张三</td>
+				<td>22</td>
+				<td><a href = "javascript:;" >删除</a></td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>李四</td>
+				<td>21</td>
+				<td><a href = "javascript:;" >删除</a></td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>王武</td>
+				<td>39</td>
+				<td><a href = "javascript:;" >删除</a></td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>赵六</td>
+				<td>26</td>
+				<td><a href = "javascript:;" >删除</a></td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>Blue</td>
+				<td>37</td>
+				<td><a href = "javascript:;" >删除</a></td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td>Mark</td>
+				<td>57</td>
+				<td><a href = "javascript:;" >删除</a></td>
+			</tr>
+			<tr>
+				<td>7</td>
+				<td>王四</td>
+				<td>33</td>
+				<td><a href = "javascript:;" >删除</a></td>
+			</tr>
+			<tr>
+				<td>8</td>
+				<td>王三</td>
+				<td>41</td>
+				<td><a href = "javascript:;" >删除</a></td>
+			</tr>
+			<tr>
+				<td>9</td>
+				<td>bmw</td>
+				<td>27</td>
+				<td><a href = "javascript:;" >删除</a></td>
+			</tr>
+			
+		</tbody> 
+	</table>
+</div>
+</body>
+</html>

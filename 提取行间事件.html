@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 strict //EN" "http://w3.org/TR/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type " content = "text/html; charset = utf-8"></meta>
+<title>提取行间事件</title> 
+<style>
+#container {margin:20px auto;width:500px;}
+#div1 {width:150px; height:150px;background:red;margin:10px;}
+</style>
+<script>
+function setStyle(name,value)
+{
+	var oDiv = document.getElementById('div1');
+	oDiv.style[name] = value;
+}
+</script>
+</head>
+
+<body>
+<div id = "container">
+	<input type = "button" value = "变宽" onclick = "setStyle('width','300px')">
+	<input type = "button" value = "变高" onclick = "setStyle('height','300px')">
+	<input type = "button" value = "变绿" onclick = "setStyle('background','green')">
+	<div id = "div1">
+	<div>
+</div>
+</body>
+</html>

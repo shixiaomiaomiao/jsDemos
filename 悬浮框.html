@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD//XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html ; charset = utf-8"></meta>
+<title>悬浮框</title>
+<style>
+#bottom {width:60px;height:100px;right:0px;bottom:0px;position:absolute;background:purple;}
+#center {width:60px;height:100px;right:0px;background:green;right:0px;position:absolute;top:300px;}
+</style>
+<script>
+function startMove(obj,iTarget)
+{
+	var speed = 0;
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function()
+	{
+		speed = (iTarget - obj.offsetTop )/4;
+		speed = speed > 0 ? Math.ceil(speed):Math.floor(speed);
+		if (obj.offsetTop == iTarget)
+		{
+			clearInterval(obj.timer);
+		}
+		else
+		{
+			obj.style.top = obj.offsetTop + speed + "px";
+		}
+	}
+	,30);
+}
+
+window.onscroll = function()
+{
+	var oBottom = document.getElementById("bottom");
+	var oCenter = document.getElementById("center");
+	var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+	var top1 = document.documentElement.clientHeight - oBottom.offsetHeight + scrollTop;
+	var top2 = parseInt((document.documentElement.clientHeight - oCenter.offsetHeight)/2 + scrollTop);
+	document.getElementById('text1').value = top1;
+	document.getElementById('text2').value = top2;
+	startMove(oBottom,top1)
+	startMove(oCenter,top2)
+	
+}
+</script>
+</head>
+<body style = "height:2000px">
+<input type = "text" style = "position:fixed; top:0px;right:0px;" id = "text1">
+<input type = "text" style = "position:fixed; top:40px;right:0px;" id = "text2">
+<div id = "bottom">
+</div>
+<div id = "center">
+</div>
+</body>
+</html>

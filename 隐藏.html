@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html ; charset = utf-8"></meta>
+<title>隐藏</title>
+<style>
+#container {width:300px; height:300px; margin:20px auto;}
+</style>
+<script>
+window.onload = function()
+{
+	var oDiv = document.getElementById('container');
+	var a = oDiv.getElementsByTagName('a');
+	for ( var i = 0 ; i < a.length ; i++ )
+	{
+		a[i].onclick = function()
+		{
+			this.parentNode.style.display = "none";
+		}
+	}
+	
+}
+</script>
+<body>
+<div id = "container">
+	<li>我是用来测试的1<a href = "javascript:;">隐藏</a></li>
+	<li>我是用来测试的2<a href = "javascript:;">隐藏</a></li>
+	<li>我是用来测试的3<a href = "javascript:;">隐藏</a></li>
+	<li>我是用来测试的4<a href = "javascript:;">隐藏</a></li>	
+</div>
+<body>
+<head>
+</html>

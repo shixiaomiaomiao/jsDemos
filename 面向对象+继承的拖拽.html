@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8"></meta>
+<title>面向对象+继承的拖拽</title>
+<style>
+#div1 {width:200px;height:200px;position:absolute;background:green;}
+#div2 {width:200px;height:200px;position:absolute;background:#f35;}
+</style>
+<script>
+function Drag(id)
+{
+	//this.event = ev;
+	var _this = this;
+	this.oDiv = document.getElementById(id);
+	this.disX = 0;
+	this.disY= 0;
+	this.oDiv.onmousedown = function(ev)
+	{
+		_this.mouseDown(ev);
+		//return false;
+	}
+	
+}
+Drag.prototype.mouseDown = function(ev)
+{
+	var oEvent = ev || event;
+	var _this = this;
+	this.disX = oEvent.clientX - this.oDiv.offsetLeft;
+	this.disY = oEvent.clientY - this.oDiv.offsetTop;
+	document.onmousemove = function(ev)
+	{
+		_this.mouseMove(ev);
+	}
+	document.onmouseup = function(ev)
+	{
+		_this.mouseUp(ev);
+	}
+}
+Drag.prototype.mouseMove = function(ev)
+{
+	var oEvent = ev || event;
+	this.oDiv.style.left = oEvent.clientX - this.disX + 'px';
+	this.oDiv.style.top = oEvent.clientY - this.disY + 'px';
+}
+Drag.prototype.mouseUp = function()
+{
+	document.onmousemove = null;
+	document.onmouseup = null;
+}
+
+//限制型的拖拽,继承于Drag
+//属性继承
+function LimitDrag(id)
+{
+	Drag.call(this,id);
+}
+//方法继承
+for ( var fn in Drag.prototype)
+{
+	LimitDrag.prototype[fn] = Drag.prototype[fn];
+}
+//重写移动函数
+LimitDrag.prototype.mouseMove = function(ev)
+{
+	var oEvent = ev || event;
+	var l = oEvent.clientX - this.disX ;
+	var h = oEvent.clientY - this.disY;
+	if ( l < 50 )
+	{
+		l = 0;
+	}
+	else
+	{
+		if ( l > document.documentElement.clientWidth - this.oDiv.offsetWidth -50 )
+		{
+			l = document.documentElement.clientWidth - this.oDiv.offsetWidth;
+		}
+	}
+	if ( h < 50)
+	{
+		h = 0;
+	}
+	else
+	{
+		if ( h > document.documentElement.clientHeight - this.oDiv.offsetHeight -50 )
+		{
+			h = document.documentElement.clientHeight - this.oDiv.offsetHeight;
+		}
+	}
+	this.oDiv.style.left = l  + 'px';
+	this.oDiv.style.top =  h + 'px';
+}
+
+window.onload = function()
+{
+	new Drag('div1');
+	new LimitDrag ('div2');
+}
+</script>
+</head>
+<body>
+<div id = "div1">我是普通拖拽</div>
+<div id = "div2">我是继承于普通拖拽的限制拖拽</div>
+</body>
+</html>

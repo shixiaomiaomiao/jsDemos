@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Transition//EN" "http://wwww.w3.org/TR/xhtml/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8"></meta>
+<title>鼠标提示框</title>
+<style>
+#div1{width:140px; height:40px;background:#CCCCCC;display:none;font-size:12px;padding:4px;}
+</style>
+<script>	
+	function show(isShow)
+	{
+		var oDiv = document.getElementById("div1");
+		if (isShow)
+		{
+			oDiv.style.display = "block";
+		}
+		else
+		{
+			oDiv.style.display = "none";
+		}
+	}
+
+</script>
+</head>
+
+<body>
+<input type = "checkbox" onmouseover = "show(true)" onmouseout = "show(false)">
+<div id = "div1">请注意勾选此选项将有可能透露个人信息！</div>
+<body>
+</html>

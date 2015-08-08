@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict //EN" "http://www.w3.org/TR/XHTML/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html ; charset = utf-8"></meta>
+<title>匀速运动</title>
+<style>
+#move {width:140px;height:140px;background:#333;margin-top:10px;position:absolute;left:0px;}
+</style>
+<script>
+//运动框架
+var timer = null;
+function startMove(iTarget)
+{	
+	var oDiv = document.getElementById('move');
+	clearInterval(timer);
+	timer = setInterval(function()
+	{
+		var speed = 2;
+		if (iTarget > oDiv.offsetLeft )
+		{
+			oDiv.style.left = oDiv.offsetLeft + speed + "px";					
+		}
+		else
+		{
+			clearInterval(timer);	
+		}
+		
+	},30)
+}
+window.onload = function()
+{
+	var oBt1 = document.getElementById('bt1');
+	var oDiv = document.getElementById('move');
+	oBt1.onclick = function()
+	{
+		startMove(300);	
+	}
+}
+</script>
+</head>
+<body>
+<input type = "button" id = "bt1" value = "开始运动">
+<div id = "move">
+</div>
+</body>
+</html>

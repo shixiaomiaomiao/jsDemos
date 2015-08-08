@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8"></meta>
+<title>土豆网的菜单悬浮效果</title> 
+<style>
+*{padding:0px;margin:0px;}
+body {background:#000;}
+ul,li{list-style-type:none;}
+#container {width :215px ;height:370px;position:absolute;right:0px;bottom:0px;overflow:hidden;}
+#buttom {width:36px;height:47px;position:absolute;right:0px;bottom:0px;
+background:url("images of tudou/minibar.png");background-position:68px 0px;cursor:pointer;z-index:3;}
+#left{width:172px; height:47px;position:absolute;bottom:0px;right:-172px;
+background:url("images of tudou/minibar.png");background-position:0px 0px;z-index:2;}
+.hidden{width:128px;height:20px;position:absolute;margin-left:42px;top:6px;}
+.hidden a{width:22px; height:20px;float:left;display:block;cursor:pointer;margin-left:2px;}
+.hidden li{width:22px; height:20px;}
+.hidden  a:first-child  li{background:url("images of tudou/minibar.png");background-position:-2px -52px;display:none;}
+.hidden  a:nth-child(2) li{background:url("images of tudou/minibar.png");background-position:-25px -52px;display:none;}
+.hidden  a:nth-child(3) li{background:url("images of tudou/minibar.png");background-position:-48px -52px;display:none;}
+.hidden  a:nth-child(4) li{background:url("images of tudou/minibar.png");background-position:-73px -52px;display:none;}
+.hidden  a:nth-child(5) li{background:url("images of tudou/minibar.png");background-position:-98px -52px;display:none;}
+
+#top {width:202px; height:316px;position:absolute;right:0px;
+bottom:43px;bottom:-318px;z-index:1;background:#111;border:1px groove #555;}
+#title{width:202px; height:15px;top:0px;position:absolute;background:#222;}
+#title a {position:absolute;cursor:pointer;display:block;}
+#title a:first-child{left:0px;width:31px; height:10px;color:orange;font-size:12px;text-align:center;top:8px;}
+#title a:nth-child(2){right:10px;width:8px; height:12px;background:url("images of tudou/minibar.png");
+background-position:0px -74px;padding-Bottom:4px;top:13px;}
+#side {width:34px;height:290px;position:absolute;bottom:0px;border:1px solid #333;background:#333;}
+#side ul {display:block;width:34px;height:112px;background:url("images of tudou/minibar.png");
+background-position:0px -145px;position:absolute;margin-top:0px;left:0px;}
+#side li{display:block;width:33px; height:15px;position:absolute;left:0px;color:#fff;font-size:12px;text-align:center;cursor:pointer;}
+#side li:first-child{top:10px;}
+#side li:nth-child(2){top:38px;}
+#side li:nth-child(3){top:64px;}
+#side li:nth-child(4){top:94px;}
+
+#content{width:157px;height:280px;position:absolute;right:0px;padding:5px;bottom:0px;background:#111;}
+.txt{color:#fff;font-size:12px;}
+</style>
+<script>
+function getStyle(obj,name)
+{
+	if (obj.currentStyle)
+	{	
+		return obj.currentStyle[name];
+	}
+	else
+	{
+		return getComputedStyle(obj,false)[name];
+	}
+}
+function getByclass(oParent,sClass)
+{
+	var aEle = oParent.getElementsByTagName("*");
+	var aResult = [];
+	for (var i = 0 ; i < aEle.length ; i++)
+	{
+		if (aEle[i].className == sClass)
+		{
+			aResult.push (aEle[i]);
+		}
+	}
+	return aResults;
+}
+function startMove(obj,attr,iTarget,fun)
+{
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function()
+	{
+		var speed = 0;
+		var cur = 0;
+		if (attr == "opacity")
+		{
+			cur = Math.round(parseFloat(getStyle(obj,attr))*100);
+		}
+		else
+		{
+			cur = parseInt(getStyle(obj,attr));
+		}
+		speed = (iTarget - cur)/8;
+		speed = speed > 0 ? Math.ceil (speed) : Math.floor(speed);
+		if (cur == iTarget)
+		{
+			clearInterval(obj.timer);
+			if (fun)
+			{
+				fun();
+			}
+		}
+		else
+		{
+			if (attr == "opacity")
+			{
+				obj.style.filter = "alpha(opacity = "+(cur+speed)+")";
+				obj.style.opacity = (cur+speed)/100;
+				
+			}
+			else
+			{
+				obj.style[attr] = cur + speed + "px";
+			}
+		}
+	
+
+	},30)
+}
+window.onload = function()
+{
+	var oBt = document.getElementById("buttom");
+	var oLeft = document.getElementById("left");
+	var oLeftA = oLeft.getElementsByTagName('a');
+	
+	var oTop = document.getElementById("top");
+	var oLi = oTop.getElementsByTagName("li");
+	var oA = oTop.getElementsByTagName("a");
+	
+	for (var i = 0; i < oLeftA.length ; i++)
+	{
+		oLeftA[i].onmouseover = function()
+		{
+			this.children[0].style.display= "block";
+		}
+		oLeftA[i].onmouseout = function()
+		{
+			this.children[0].style.display= "none";
+		}
+	}
+	for (var i = 0; i < oLi.length ; i ++)
+	{
+		oLi[i].onmouseover = function()
+		{
+			this.style.color = "yellow";
+		}
+		oLi[i].onmouseout = function()
+		{
+			this.style.color = "#fff";
+		}
+	}
+	
+	oA[0].onmouseover = function()
+	{
+		this.style.color = "yellow";
+	}
+	oA[0].onmouseout = function()
+	{
+		this.style.color = "#fff";
+	}
+	oA[1].onclick = function()
+	{
+		startMove(oTop,"bottom",-271,function()
+		{
+			//startMove(oTop,"bottom",-318);
+			oTop.style.display = "none";
+			startMove(oLeft,"right",-172);
+			
+		});
+		
+	}
+	//火狐不支持background-position-x
+	oBt.onmouseover = function()
+	{
+		this.style["background-position"]= "35px 0px";		
+	}
+	oBt.onmouseout = function()
+	{
+		this.style["background-position"]= "68px 0px";		
+	}
+	oBt.onclick = function()
+	{
+		startMove(oLeft,"right",36,function()
+		{
+			oTop.style.display = "block";
+			startMove(oTop,"bottom",40);
+		});	
+	}
+	
+}
+</script>
+</head>
+<body>
+<div id = "container">
+	<div id = "buttom"></div>
+	<div id = "left"> 
+		<ul class = "hidden">
+			<a href = "javascript:;"><li></li></a>
+			<a href = "javascript:;"><li></li></a>
+			<a href = "javascript:;"><li></li></a>
+			<a href = "javascript:;"><li></li></a>
+			<a href = "javascript:;"><li></li></a>
+		</ul>
+	</div>
+	<div id = "top">
+		<div id = "title">
+			<a>天气</a>
+			<a></a>
+		</div>
+		<div id = "side" class = "txt">
+			<ul>
+				<li>星座</li>
+				<li>排行</li>
+				<li>热点</li>
+				<li>直播</li>
+			</ul>
+		</div>
+		<div id = "content" class = "txt">
+			北京
+			</br>今天(周二)<img src = "images of tudou/01.gif">
+			</br>-1~10&#8451; 晴 微风小于3级
+			</br>明天(周三)<img src = "images of tudou/02.gif">
+			</br>0~11&#8451; 多云 北风3-4级
+			</br>后天(周四)<img src = "images of tudou/01.gif">
+			</br>-1~12&#8451; 晴 北风3-4级 转
+			</br>微风小于3级
+		</div>
+	</div>
+	
+</div>
+</body>
+</html>

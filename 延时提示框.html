@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" Content = "text/html ; charset = utf-8"></meta>
+<title>延时提示框</title>
+<style>
+#container {width : 300px; height:300px;margin:20px auto;}
+#div1 { width :50px ; height: 50px;background:red;float:left;}
+#div2 { display:none; width : 120px; height: 200px; background: #333333; color: #CCCCCC;float:left;margin-left:20px;text-align:center;padding:30px;}
+</style>
+<script>
+window.onload = function()
+{
+	var oDiv1 = document.getElementById('div1');
+	var oDiv2 = document.getElementById('div2');
+	var timer = null;
+	oDiv1.onmouseover =oDiv2.onmouseover= function()
+	{
+		clearTimeout(timer);
+		oDiv2.style.display = "block";
+	}
+	oDiv1.onmouseout = oDiv2.onmouseout = function()
+	{
+		timer = setTimeout(function()
+		{		
+			oDiv2.style.display = "none";
+		}
+		,1000)
+	}
+}
+</script>
+</head>
+<body>
+<div id = "container">
+	<div id = "div1">
+	</div>
+	<div id = "div2">
+	我是延时提示框
+	</div>
+</div>
+</body>
+</html>

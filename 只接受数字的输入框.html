@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html ; charset = utf-8"></meta>
+<title>只接受数字的输入框</title>
+<style>
+#container {width:50px;margin:20px auto;}
+</style>
+<script>
+window.onload = function()
+{
+	var oTxt = document.getElementById("txt1");
+	oTxt.onkeydown = function(ev)
+	{
+		var oEvent = ev || event;
+		if ((ev.keyCode != 37)&&(ev.keyCode != 39)&&(ev.keyCode != 8)&&(ev.keyCode < 48 || ev.keyCode > 57))
+		{
+			return false;
+		}
+	}
+}
+</script>
+</head>
+<body>
+<div id = "container">
+	<input type = "text" id = "txt1">
+</div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8"></meta>
+<title>鼠标移动</title>
+<style>
+div {width:5px;height:5px;background:red;position:absolute;}
+</style>
+<script>
+function getPos(ev)
+{
+	var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+	var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+	return {x:ev.clientX+scrollLeft,y:ev.clientY+scrollTop};
+}
+window.onload = function()
+{
+	
+	document.onmousemove = function(ev)
+	{
+		var oEvent = ev || event;
+		var aDiv = document.getElementsByTagName("div");
+		//第一个div跟随鼠标移动
+		aDiv[0].style.left = getPos(oEvent).x + "px";
+		aDiv[0].style.top = getPos(oEvent).y + "px";
+	
+		for (var i = aDiv.length-1;i > 0 ; i--)
+		{
+			aDiv[i].style.left = aDiv[i-1].offsetLeft + "px";//后一个div的坐标跟着前一个div
+			aDiv[i].style.top = aDiv[i-1].offsetTop + "px";//后一个div的坐标跟着前一个div
+		}
+	}
+	//alert(getPos(oEvent).x);
+}
+</script>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>

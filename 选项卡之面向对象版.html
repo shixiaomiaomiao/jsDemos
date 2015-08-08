@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<body>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8"></meta>
+<title>选项卡之面向对象版</title>
+<style>
+#container {width:300px;margin:20px auto;}
+#container  div{width:200px;height:200px;display:none;margin-top:10px;}
+#container  .active{display:block;background:#e53;}
+</style>
+<script>
+function TabSwitch(id)
+{
+	var _this = this;
+	var oDiv = document.getElementById(id);
+	this.aBt = oDiv.getElementsByTagName('input');
+	this.aDiv = oDiv.getElementsByTagName('div');
+	for (var i = 0; i < this.aBt.length ;i++)
+	{
+		this.aBt[i].index = i;
+		this.aBt[i].onclick = function()
+		{
+			_this.fnClick(this);
+		}
+	}
+}
+TabSwitch.prototype.fnClick = function(oBtn)
+{
+	for (var i = 0; i < this.aDiv.length ;i++)
+	{
+		this.aDiv[i].className = '';
+	}
+	this.aDiv[oBtn.index].className = 'active';
+}
+window.onload = function()
+{
+	new TabSwitch('container');
+}
+</script>
+
+</head>
+</body>
+<div id = "container">
+	<input type = "button" value = "aaa"/>
+	<input type = "button" value = "bbb"/>
+	<input type = "button" value = "ccc"/>
+	<div id = "div1" class = "active">aaa</div>
+	<div id = "div2" >bbb</div>
+	<div id = "div3" >ccc</div>
+</div>
+
+</html>

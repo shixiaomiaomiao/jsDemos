@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict//EN" "http:www.w3.org/TR/XHTML/DTD/xhtml-strcit.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html ; charset = utf-8"></meta>
+<title>表格排序</title>
+<style>
+#container {width:410px; margin:20px auto;}
+</style>
+<script>
+window.onload = function()
+{
+  var oTab = document.getElementById('table');
+  var oBt1 = document.getElementById('bt1');
+  //排序，现将顺序排列好，再用循环添加到表格中
+  oBt1.onclick = function()
+  {
+		var arr = [];
+		for ( var i = 0 ; i < oTab.tBodies[0].rows.length ; i++)
+		{
+			arr[i] = oTab.tBodies[0].rows[i];
+		}
+		arr.sort(function(tr1,tr2)
+		{
+			var n1 = parseInt(tr1.cells[2].innerHTML);
+			var n2 = parseInt(tr2.cells[2].innerHTML);
+			return n1-n2;
+		})
+		for ( var i = 0; i < arr.length ; i ++)
+		{
+			oTab.tBodies[0].appendChild(arr[i]);  //appendChild执行两个步骤：1.把元素从原有的父级上删掉2.添加到指定的父级上
+		}
+		
+  }
+	  
+}
+</script>
+</head>
+<body>
+<div id = "container">
+	<input type = "button" value = "按年龄排序" id = "bt1">
+	<table id = "table" border = "1" width = "400" >
+		<thead>
+			<td>ID</td>
+			<td>姓名</td>
+			<td>年龄</td>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>张三</td>
+				<td>22</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>李四</td>
+				<td>21</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>王武</td>
+				<td>39</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>赵六</td>
+				<td>26</td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>Blue</td>
+				<td>37</td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td>Sam</td>
+				<td>15</td>
+			</tr>
+			<tr>
+				<td>7</td>
+				<td>Mei</td>
+				<td>33</td>
+			</tr>
+			<tr>
+				<td>8</td>
+				<td>刘四</td>
+				<td>32</td>
+			</tr>
+			<tr>
+				<td>9</td>
+				<td>方大</td>
+				<td>25</td>
+			</tr>
+			
+		</tbody>
+	</table>
+</div>
+
+</body>
+</html>

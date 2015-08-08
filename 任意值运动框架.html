@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD//XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html ; charset = utf-8"></meta>
+<title>任意值运动框架</title>
+<style>
+#container {width:1100px; margin:20px auto;}
+#div1 {width:150px; height:150px; background:yellow;border:1px solid green;margin-left:10px;float:left;}
+#div2 {width:150px; height:150px; background:yellow;border:1px solid green;margin-left:10px;float:left;}
+#div3 {width:150px; height:150px; background:yellow;border:1px solid green;margin-left:10px;float:left;
+filter:alpha(opacity=30);opacity:0.3;}
+#div4 {width:150px; height:150px; background:yellow;border:1px solid green;margin-left:10px;float:left;}
+#div5 {width:150px; height:150px; background:yellow;border:1px solid green;margin-left:10px;float:left;font-size:12px;}
+</style>
+<script>
+//获取非行间样式
+function getStyle(obj,name)
+{
+	if (obj.currentStyle)
+	{
+		return obj.currentStyle[name];
+	}
+	else
+	{
+		return getComputedStyle(obj,false)[name];
+	}	
+}
+//任意值运动框架
+function startMove(obj,attr,iTarget)
+{
+	clearInterval(obj.timer);
+	var speed = 0;
+	var cur =null;
+	obj.timer = setInterval (function()
+	{	
+		if (attr == "opacity")
+		{
+			cur = Math.round(parseFloat(getStyle(obj,attr))*100);
+		}
+		else
+		{
+			cur = parseInt(getStyle(obj,attr));
+			
+		}
+		
+		speed = (iTarget - cur)/6;
+		speed = speed > 0?Math.ceil (speed):Math.floor(speed);
+		if (iTarget == cur)
+		{
+			clearInterval(obj.timer);
+		}
+		else
+		{
+			if (attr == "opacity")
+			{	
+				
+				obj.style.filter = "alpha(opacity=" + (cur + speed)+ ")";
+				obj.style.opacity = (cur + speed)/100;
+				
+			}
+			else
+			{
+				obj.style[attr] = cur + speed +'px';
+			}
+		}
+	}
+	,30)
+}
+window.onload = function()
+{
+	//变高
+	var oDiv1 = document.getElementById('div1');
+	oDiv1.timer = null;
+	oDiv1.onmouseover = function()
+	{
+		startMove(this,'height',300);
+	}
+	oDiv1.onmouseout = function()
+	{
+		startMove(this,'height',150);
+	}
+	
+	//变宽
+	var oDiv2 = document.getElementById('div2');
+	oDiv2.timer = null;
+	oDiv2.onmouseover = function()
+	{
+		startMove(this,'width',300);
+	}
+	oDiv2.onmouseout = function()
+	{
+		startMove(this,'width',150);
+	}
+	//透明度
+	var oDiv3 = document.getElementById('div3');
+	oDiv3.timer = null;
+	oDiv3.onmouseover = function()
+	{
+		startMove(this,'opacity',100);
+	}
+	oDiv3.onmouseout = function()
+	{
+		startMove(this,'opacity',30);
+	}
+	
+	//边框厚度
+	var oDiv4 = document.getElementById('div4');
+	oDiv4.timer = null;
+	oDiv4.onmouseover = function()
+	{
+		startMove(this,'border-left-width',80);
+	}
+	oDiv4.onmouseout = function()
+	{
+		startMove(this,'border-left-width',1);
+	}
+	//字体大小
+	var oDiv5 = document.getElementById('div5');
+	oDiv5.timer = null;
+	oDiv5.onmouseover = function()
+	{
+		startMove(this,'fontSize',40);
+	}
+	oDiv5.onmouseout = function()
+	{
+		startMove(this,'fontSize',12);
+	}
+}
+
+</script>
+</head>
+<body>
+<div id = "container">
+	<div id = "div1">变高</div>
+	<div id = "div2">变宽</div>
+	<div id = "div3">变透明</div>
+	<div id = "div4">边框厚度,边框厚度不管是border还是padding还是margin都只能设置一个边，无法同时设置4边</div>
+	<div id = "div5">字体大小</div>
+</div>
+</body>
+</html>

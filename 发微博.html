@@ -1,0 +1,158 @@
+<! DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict //EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-strict.dtd">
+<!存在问题：1.字数太多，他不会自动换行，而且超出了li!>
+
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html ; charset = utf-8"></meta>
+<title>发微博</title>
+<style>
+li{list-style-type:none;}
+#container {width: 500px; border:1px solid #333333;margin:20px auto;padding:20px;}
+.text {width:400px;height:70px;display:block;float:left;margin-bottom:20px;}
+.bt1 {width:80px;height:60px;font-size:25px;display:block;float:left;}
+#content {width:450px;border:1px solid #CCCCCC;padding:5px;clear:both;display:block;}
+.active {border:1px dashed #CCCCCC;margin-bottom:10px;font-size:15px;position:relative;display:block;word-wrap:break-word 
+;padding-Top:5px;}
+.delete {margin-left:400px;position:relative;display:block;visibility:hidden;}
+</style>
+<script>
+function getStyle(obj,name)
+{
+	if (obj.currentStyle)
+	{
+		return obj.currentStyle[name];
+	}
+	else
+	{
+		return getComputedStyle(obj,false)[name];
+	}
+}
+function startMove(obj,json,fun)
+{
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function(){
+	var allStop = true;
+	for ( var attr in json)
+	{
+		var speed = 0;
+		var cur = 0;
+		if ( attr == "opacity" )
+		{
+			cur = Math.round(parseFloat(getStyle(obj,attr))*100);
+		}
+		else
+		{
+			cur = parseInt(getStyle(obj,attr));
+		}
+		speed = (json[attr] - cur)/5;
+		speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+		if ( cur != json[attr] )
+		{
+			allStop = false;
+		}
+		if ( attr == "opacity")
+		{
+			obj.style.filter = "alpha(opacity = "+(cur + speed)+")";
+			obj.style.opacity = (cur + speed )/100;
+		}
+		else
+		{
+			obj.style[attr] = cur + speed + "px";
+		}
+	}
+	if ( allStop )
+	{
+		clearInterval(obj.timer);
+		if (fun)
+		{
+			fun();
+		}
+	}
+	},30)
+}
+window.onload = function()
+{
+	var timer = null;
+	var oTxt = document.getElementById('text');
+	var oBt1 = document.getElementById('bt1');
+	var oDiv = document.getElementById('content');
+	var aLi = oDiv.getElementsByTagName('li');
+
+	oBt1.onclick = function()
+	{
+		if (oTxt.value)
+		{
+			var oLi = document.createElement('li');
+			oLi.className = "active";
+			oLi.innerHTML = oTxt.value + '<a href = "javascript:;" class = "delete ">删除</a>';
+			if (aLi[0])
+			{
+				oDiv.insertBefore(oLi,aLi[0]);
+			}
+			else
+			{
+				oDiv.appendChild(oLi);
+			}
+			
+			//Li的高度不固定
+			var iHeight = oLi.offsetHeight;
+			oLi.style.height = 0;
+			startMove(oLi,{"height":iHeight},false);
+		
+			oLi.onmouseover = function()
+			{
+				this.children[0].style.visibility = "visible";
+				this.style.background = "#eee";
+				this.children[0].onclick = function()
+				{
+					oDiv.removeChild(this.parentNode);
+				}
+			}
+			oLi.onmouseout = function()
+			{
+				this.style.background = "";
+				this.children[0].style.visibility = "hidden";
+			}
+			oTxt.value = "";
+		}
+		else
+		{
+			alert("请随便说点什么吧！");
+		}
+		
+	}
+	for ( var i = 0 ; i < aLi.length ; i++ )
+	{
+		aLi[i].onmouseover = function()
+		{
+			this.style.background = "#eee";
+			this.children[0].style.visibility = "visible";
+			this.children[0].onclick = function()
+			{
+				oDiv.removeChild(this.parentNode);
+			}
+		}
+		aLi[i].onmouseout = function()
+		{
+			this.children[0].style.visibility = "hidden";
+			this.style.background = "";
+		}
+	}
+}
+</script>
+</head>
+<body>
+<div id = "container">
+<textarea id = "text" type = "text" class = "text"></textarea>
+<input class = "bt1" type = "button" value = "发送" id = "bt1">
+<div id = "content">
+	<li class = "active">在输入框中输入内容
+	<a href = "javascript:;" class = "delete">删除</a>
+	</li>
+	<li class = "active">点击发送，可以显示在列表中
+	<a href = "javascript:;" class = "delete">删除</a>
+	</li>
+</div>
+</div>
+</body>
+</html>

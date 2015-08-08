@@ -1,0 +1,362 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!问题：(1)将第一幅图的z-index在非行间置为1,没有用，只能在行间置为1
+(2)精简代码>
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html ; charset = utf-8"></meta>
+<title>图片播放</title>
+<style>
+ul,li{list-style-type:none;}
+body{background:#333;}
+#container {width:400px; margin:20px auto;height:440px;}
+
+#pic { width: 400px; height:320px;cursor:pointer;position:relative;}
+#pic li{ position : absolute; z-index :0;display:block;overflow:hidden;}
+.left {width:160px;height:320px;float:left;margin-top:0px;position:relative;z-index:99999;}
+.right {width:160px;height:320px;float:left;margin-top:0px;position:relative;z-index:99999;}
+.left a{ width:60px; height:60px;background:url('images/btn.gif');z-index:100;
+position:absolute;display:block;background-position:0px 0px;top:110px;left:10px;filter:alpha(opacity = 0);opacity:0;}
+.right a{ width:60px; height:60px;background:url('images/btn.gif');z-index:100;
+position:absolute;display:block;background-position:0px 60px;top:110px;right:10px;filter:alpha(opacity = 0);opacity:0;}
+
+#text {width:380px; height:10px;  margin-top:-30px;
+padding:10px;position:absolute;font-size:12px;color:#FFFAF0;z-index:999;}
+#text span {position:absolute; right:10px;}
+
+#bottom {width:400px; height:120px; background:#999;position:absolute;overflow:hidden;}
+#bottom ul {width:780px;height:100px;margin-top:10px;margin-left:-40px;position:absolute;}
+#bottom ul li {width:120px ; height:100px; margin-left:10px;float:left;filter:alpha(opacity=30);opacity:0.3;position:relative;}
+#bottom ul li:first-child{filter:alpha(opacity=100);opacity:1;}
+</style>
+<script>
+var txtArray = ['都市魅力','古香古色','沉浸舞步的舞者','名跑车','聆听天籁的精灵','炫彩光芒'];
+function getStyle(obj,name)
+{
+	if (obj.currentStyle)
+	{
+		return obj.currentStyle[name];
+	}
+	else
+	{
+		return getComputedStyle(obj,false)[name];
+	}
+}
+function startMove(obj,attr,iTarget)
+{
+	clearInterval(obj.timer);
+	var cur = 0;
+	var speed = 0;
+	obj.timer = setInterval(function()
+	{
+		if ( attr == "opacity")
+		{
+			cur = Math.round(parseFloat(getStyle(obj,attr))*100);
+		}
+		else
+		{
+			cur = parseInt(getStyle(obj,attr));
+		}
+		speed = (iTarget-cur)/3;
+		speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+		if ( cur == iTarget )
+		{
+			clearInterval(obj.timer);
+		}
+		else
+		{
+			if ( attr == "opacity")
+			{
+				obj.style.filter = "alpha(opacity= "+(cur+speed)+")";
+				obj.style.opacity = (cur+speed)/100;
+			}
+			else
+			{
+				obj.style[attr] = cur + speed + "px";
+			}
+		}
+	},30)
+	
+}
+
+window.onload = function()
+{
+	var oContainer = document.getElementById("container");
+	var oPic = document.getElementById("pic");
+	var oPicLi = oPic.getElementsByTagName("li");
+	var oTxt = document.getElementById("text");
+	var aArrow = oPic.getElementsByTagName("ul");
+	var oBot = document.getElementById("bottom");
+	var oUl = oBot.getElementsByTagName('ul')[0];
+	var oLi = oBot.getElementsByTagName('li');
+	var timer = null;
+	var nowZIndex = 2;
+	
+	var j = 1; //当前图片的序号，从1开始
+	var speed = oLi[0].offsetWidth + 10 ;
+	var target = 0;  //初始的offsetLeft值
+	
+	oContainer.onmouseover = function()
+	{
+		clearInterval(timer);
+	}
+	oContainer.onmouseout = function()
+	{
+		clearInterval(timer);
+		timer = setInterval(function(){
+	
+		for (var i = 0 ; i < oLi.length ; i ++)
+			{
+				oLi[i].style.filter = "alpha(opacity = 30)";
+				oLi[i].style.opacity = 0.3 ;
+			}
+			
+		switch(j)
+				{
+					case 1:
+						j += 1;
+						break;
+					case 2:
+						target = -speed * 1;
+						startMove(oUl,'left',target);
+						j += 1;
+						break;
+					case 5:
+						j += 1;
+						break;
+					case 6:
+						target = 0;	
+						startMove(oUl,'left',target);
+						j = 1;
+						break;
+					default:
+						target = -(speed * (j-1));
+						startMove(oUl,'left',target);
+						j += 1;
+						break;	
+				}		
+							
+				//大图替换
+				//oPic.style["background"]= "url(images/"+j+".jpg)";
+				oPicLi[j-1].style["z-index"]= nowZIndex++;
+				oPicLi[j-1].style.height = 0;
+				startMove(oPicLi[j-1],"height",320);
+				oTxt.innerHTML =txtArray[j-1]+ "<span>"+j+"/6</span>";
+				for (var i = 0 ; i < aArrow.length ; i++)
+				{
+					aArrow[i].style["z-index"] += 1;
+				}
+				oTxt.style["z-index"] += 1;
+				
+				//小图变清晰
+				oLi[j-1].style.opacity = 1;
+				oLi[j-1].style.filter = "alpha(opacity = 100)";	
+		},2000)
+	}
+	clearInterval(timer);
+	timer = setInterval(function(){
+	
+	for (var i = 0 ; i < oLi.length ; i ++)
+		{
+			oLi[i].style.filter = "alpha(opacity = 30)";
+			oLi[i].style.opacity = 0.3 ;
+		}
+		
+	switch(j)
+			{
+				case 1:
+					j += 1;
+					break;
+				case 2:
+					target = -speed * 1;
+					startMove(oUl,'left',target);
+					j += 1;
+					break;
+				case 5:
+					j += 1;
+					break;
+				case 6:
+					target = 0;	
+					startMove(oUl,'left',target);
+					j = 1;
+					break;
+				default:
+					target = -(speed * (j-1));
+					startMove(oUl,'left',target);
+					j += 1;
+					break;	
+			}		
+						
+			//大图替换	
+			oPicLi[j-1].style["z-index"] = nowZIndex++;;
+			oPicLi[j-1].style.height = 0;
+			startMove(oPicLi[j-1],"height",320);
+			oTxt.innerHTML =txtArray[j-1]+ "<span>"+j+"/6</span>";	
+			
+			for (var i = 0 ; i < aArrow.length ; i++)
+			{
+				aArrow[i].style["z-index"] += 1;
+			}
+			oTxt.style["z-index"] += 1;
+			
+			//小图变清晰
+			oLi[j-1].style.opacity = 1;
+			oLi[j-1].style.filter = "alpha(opacity = 100)";	
+	},2000)
+	
+	for ( var i =0 ; i < aArrow.length ; i++ )
+	{	
+		aArrow[i].children[0].timer = null;
+		aArrow[i].index = i;
+		
+		//缩略图的移入移出，清晰度变化
+		for ( var p = 0; p < oLi.length ; p++ )
+		{		
+			oLi[p].index = p;
+			oLi[p].children[0].height = 100;
+			oLi[p].children[0].width = 120;
+	
+			oLi[p].onmouseover = function()
+			{
+				startMove(this,"opacity",100);
+			}
+			
+			oLi[p].onmouseout = function()
+			{	
+				if (this.index != (j-1))
+				{
+					startMove(this,"opacity",30);
+				}
+				
+			}
+		}
+		
+		aArrow[i].onmouseover = function()
+		{
+			startMove(this.children[0],"opacity",100);
+		}
+		aArrow[i].onmouseout = function()
+		{
+			startMove(this.children[0],"opacity",0);
+		}
+
+		//箭头点击事件
+		aArrow[i].children[0].onclick = function()
+		{						
+			
+			
+			//index==0代表向后退，index==1代表向前进
+			var index = this.parentNode.index; 
+			
+			
+			for (var i = 0 ; i < oLi.length ; i ++)
+			{
+				oLi[i].style.filter = "alpha(opacity = 30)";
+				oLi[i].style.opacity = 0.3 ;
+			}
+			
+			
+			//小图滚动
+			switch(j)
+			{
+				case 1:
+					if (index == 0)
+					{
+						j = 6;
+						target = -(speed * 3);
+						startMove(oUl,'left',target);
+					}
+					else
+					{
+						j += 1;	
+					}
+					break;
+				case 2:
+					if (index == 0)
+					{
+						j -= 1;
+					}
+					else
+					{
+						target = -speed * 1;
+						startMove(oUl,'left',target);
+						j += 1;
+					}
+					break;
+				case 5:
+					if (index == 1)
+					{
+						j += 1;
+					}
+					else
+					{	
+						target = -speed * 2;
+						startMove(oUl,'left',target);
+						j -= 1;
+					}
+					break;
+				case 6:
+					if (index == 1)
+					{
+						target = 0;	
+						startMove(oUl,'left',target);
+						j = 1;
+					}
+					else
+					{
+						j -= 1;
+					}
+					break;
+				default:
+					target = index > 0 ? (speed * (j-1)):(speed * (j-3));
+					target = -target;
+					startMove(oUl,'left',target);
+					j = index > 0 ? (j+1) :(j-1);
+					break;	
+			}		
+						
+			//大图替换
+			oPicLi[j-1].style["z-index"] = nowZIndex++;
+			oPicLi[j-1].style.height = 0;
+			startMove(oPicLi[j-1],"height",320);
+			oTxt.innerHTML =txtArray[j-1]+ "<span>"+j+"/6</span>";	
+			
+			for (var i = 0 ; i < aArrow.length ; i++)
+			{
+				aArrow[i].style["z-index"] += 1;
+			}
+			oTxt.style["z-index"] += 1;
+			
+			//小图变清晰
+			oLi[j-1].style.opacity = 1;
+			oLi[j-1].style.filter = "alpha(opacity = 100)";	
+		}		
+	}
+}
+</script>
+</head>
+<body>
+<div id = "container">
+	<div id = 'pic'>
+		<ul class = "left"><a></a></ul>
+		<ul class = "right"><a></a></ul>
+		<li style = "z-index:1"><img src = "images/1.jpg"></li>
+		<li><img src = "images/2.jpg"></li>
+		<li><img src = "images/3.jpg"></li>
+		<li><img src = "images/4.jpg"></li>
+		<li><img src = "images/5.jpg"></li>
+		<li><img src = "images/6.jpg"></li>
+	</div>
+	<div id = "text">都市魅力<span>1/6</span></div>
+	<div id = "bottom">
+		<ul>
+			<li><img src = "images/1.jpg"></li>
+			<li><img src = "images/2.jpg"></li>
+			<li><img src = "images/3.jpg"></li>
+			<li><img src = "images/4.jpg"></li>
+			<li><img src = "images/5.jpg"></li>
+			<li><img src = "images/6.jpg"></li>
+		</ul>
+	</div>
+</div>
+</body>
+</html>

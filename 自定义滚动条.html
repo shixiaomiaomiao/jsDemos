@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html ;charset = utf-8"></meta>
+<title>自定义滚动条</title>
+<style>
+.container{width:320px;height:350px;border:1px solid #999;position:relative;margin-left:10px;float:left;}
+#content4{width:0px;}
+.bg{width:300px;height:20px;position:relative;background:#ccc;margin:5px;}
+#bg1{width:20px;height:250px;float:left;position:relative;margin:0px;border:1px solid black;margin-left:10px;}
+.content{width:20px;height:20px;background:red;position:absolute;}
+#txtBg{width:280px;height:250px;border:1px solid black;float:left;position:relative;overflow:hidden;}
+#txt {padding:9px;position:absolute;}
+#alpha {width:200px;height:200px;background:red;margin:20px;filter:alpha(opacity:0);opacity:0;}
+#size{background:#000;margin: 20px;}
+#txt4{width:50px;height:20px;}
+</style>
+<script>
+function getStyle(obj,name)
+{
+	if (obj.currentStyle)
+	{
+		return obj.currentStyle[name];
+	}
+	else
+	{
+		return getComputedStyle(obj,false)[name];
+	}
+}
+function startMove(obj,json,fun)
+{
+	clearInterval ( obj.timer );
+	obj.timer = setInterval(function(){
+	var speed = 0;
+	var cur = 0;
+	var allStop = true;
+	for ( var attr in json )
+	{
+		if ( attr == "opacity")
+		{
+			cur = Math.round(parseFloat(getStyle(obj,attr))*100);
+		}
+		else
+		{
+			cur = parseInt(getStyle(obj,attr));
+		}
+		speed = ( json[attr] - cur )/6;
+		speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+		if ( cur != json[attr] )
+		{
+			allStop = false;
+			if ( attr == "opacity" )
+			{
+				obj.style.filter = "alpha(opacity = "+ ( cur + speed )+")";
+				obj.style.opacity = ( cur + speed )/100;
+			}
+			else
+			{
+				obj.style[attr] = cur + speed + "px";
+			}
+		}	
+	}
+	if ( allStop )
+	{
+		clearInterval(obj.timer);
+		if (fun)
+		{
+			fun();
+		}
+	}
+	},30)
+}
+window.onload = function()
+{
+	var oCont1 = document.getElementById("content1");
+	var oCont2 = document.getElementById("content2");
+	var oCont3 = document.getElementById("content3");
+	var oCont4 = document.getElementById("content4");
+	var oTxtBg = document.getElementById("txtBg");
+	var oBg1 = document.getElementById("bg1");
+	var oBg2 = document.getElementById("bg2");
+	var oBg3 = document.getElementById("bg3");
+	var oBg4 = document.getElementById("bg4");
+	var oTxt1 = document.getElementById("txt1");
+	var oTxt2 = document.getElementById("txt2");
+	var oTxt3 = document.getElementById("txt3");
+	var oTxt4 = document.getElementById("txt4");
+	var oTxt = document.getElementById("txt");
+	var oSize = document.getElementById("size");
+	var timer = null;
+	
+	
+	var oAlpha = document.getElementById("alpha");
+	oCont1.onmousedown = function(ev)
+	{
+		var l = 0;
+		var t = 0;
+		var oEvent = ev || event ;
+		var disY = oEvent.clientY - this.offsetTop ;
+		document.onmousemove = function(ev)
+		{
+			var oEvent = ev || event ;
+			var scale = 0;
+			t = oEvent.clientY - disY;
+			if ( t < 0)
+			{
+				 t = 0;
+			}
+			else if ( t > oBg1.offsetHeight - oCont1.offsetHeight -2)
+			{
+				t = oBg1.offsetHeight - oCont1.offsetHeight -2 ;
+			}
+			scale = t / 230 ;
+			oTxt1.value = scale;
+			oCont1.style.top = t + "px";
+			oCont1.style.left = "0px";
+			oTxt.style.top = - scale * (oTxt.offsetHeight - oTxtBg.offsetHeight) + "px"; 
+		}
+		document.onmouseup = function()
+		{
+			document.onmousemove = null;
+			document.onmouseup = null;
+		}
+		return false;
+	}
+	
+	
+	oCont2.onmousedown = function(ev)
+	{
+		var l = 0;
+		var t = 0;
+		var oEvent = ev || event ;
+		var disX = oEvent.clientX - this.offsetLeft ;
+		document.onmousemove = function(ev)
+		{
+			var oEvent = ev || event ;
+			var scale = 0;
+			l = oEvent.clientX - disX;
+			if ( l < 0)
+			{
+				 l = 0;
+			}
+			else if ( l > oBg2.offsetWidth - oCont2.offsetWidth)
+			{
+				l = oBg2.offsetWidth - oCont2.offsetWidth ;
+			}
+			scale = l / (oBg2.offsetWidth - oCont2.offsetWidth) ;
+			oTxt2.value = scale;
+			oCont2.style.top = "0px";
+			oCont2.style.left = l + "px";
+			oAlpha.style.filter = "alpha(opacity:"+(scale*100)+")";
+			oAlpha.style.opacity = scale;
+		}
+		document.onmouseup = function()
+		{
+			document.onmousemove = null;
+			document.onmouseup = null;
+		}
+		return false;
+	}
+	
+	oCont3.onmousedown = function(ev)
+	{
+		var l = 0;
+		var t = 0;
+		var oEvent = ev || event ;
+		var disX = oEvent.clientX - this.offsetLeft ;
+		document.onmousemove = function(ev)
+		{
+			var oEvent = ev || event ;
+			var scale = 0;
+			l = oEvent.clientX - disX;
+			if ( l < 0)
+			{
+				 l = 0;
+			}
+			else if ( l > oBg3.offsetWidth - oCont3.offsetWidth)
+			{
+				l = oBg3.offsetWidth - oCont3.offsetWidth ;
+			}
+			scale = l / (oBg3.offsetWidth - oCont3.offsetWidth) ;
+			oTxt3.value = scale;
+			oCont3.style.top = "0px";
+			oCont3.style.left = l + "px";
+			oSize.style.width = 200 * scale + "px";
+			oSize.style.height = 200 * scale + "px";
+		}
+		document.onmouseup = function()
+		{
+			document.onmousemove = null;
+			document.onmouseup = null;
+		}
+		return false;
+	}
+	
+	clearInterval(timer);
+	timer = setInterval (function(){	
+		var rate = 0;
+		rate = oCont4.offsetWidth + 10;
+		if ( rate > oBg4.offsetWidth )
+		{
+			setTimeout(500);
+			rate = 0;
+		}
+		oTxt4.value = (oCont4.offsetWidth) / oBg4.offsetWidth * 100;
+		startMove(oCont4,{"width":rate},false);			
+	},2000)
+}
+</script>
+</head>
+<body>
+<div id = "container1" class = "container">
+	<h2>控制文字滚动</h2>	
+	<input type = "text" id = "txt1"/>	
+	<div id = "txtBg">
+		<div id = "txt">
+			找不到服务器
+	Firefox 无法找到在 bbs.sjtu.edu.cn 的服务器。
+    请检查该地址是否输入错误，比如将"www.example.com"错写成"ww.example.com"
+    如果您无法载入任何页面，请检查您计算机的网络连接。
+    如果您的计算机或网络受到防火墙或者代理服务器的保护，请确认 Firefox 已被授权访问网络。
+				找不到服务器
+	Firefox 无法找到在 bbs.sjtu.edu.cn 的服务器。
+    请检查该地址是否输入错误，比如将"www.example.com"错写成"ww.example.com"
+    如果您无法载入任何页面，请检查您计算机的网络连接。
+    如果您的计算机或网络受到防火墙或者代理服务器的保护，请确认 Firefox 已被授权访问网络。
+				找不到服务器
+	Firefox 无法找到在 bbs.sjtu.edu.cn 的服务器。
+    请检查该地址是否输入错误，比如将"www.example.com"错写成"ww.example.com"
+    如果您无法载入任何页面，请检查您计算机的网络连接。
+    如果您的计算机或网络受到防火墙或者代理服务器的保护，请确认 Firefox 已被授权访问网络。
+		</div>	
+	</div>
+	<div class = "bg" id = "bg1">
+			<div id = "content1" class = "content"></div>
+	</div>
+	
+</div>
+<div id = "container2"   class = "container">
+	<h2>控制透明度</h2>
+	<div class = "bg" id = "bg2">
+		<div id = "content2" class = "content"></div>
+	</div>
+	<input type = "text" id = "txt2"/>	
+	<div id = "alpha"></div>
+</div>
+<div id = "container3"  class = "container">
+	<h2>控制物体大小</h2>
+	<div class = "bg" id = "bg3">
+		<div id = "content3" class = "content"></div>
+	</div>
+	<input type = "text" id = "txt3" />
+		<div id = "size"></div>
+</div>
+<div id = "container4"  class = "container">
+	<h2>进度条</h2>
+	<div class = "bg" id = "bg4">
+		<div id = "content4" class = "content"></div>
+	</div>
+	<input type = "text" id = "txt4"/><b>%</b>	
+</div>
+</body>
+</html>

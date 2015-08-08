@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-W3C//DTD XHTML1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8"></meta>
+<title>放烟花</title>
+<style>
+div {width:2px;height:2px;background:red;position:absolute;display:none;bottom:0px;}
+</style>
+<script>
+function getStyle(obj,name)
+{
+	if (obj.currentStyle)
+	{
+		return obj.currentStyle[name];
+	}
+	else
+	{
+		return getComputedStyle(obj,false)[name];
+	}
+}
+function startMove(obj,json,fun)
+{
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function(){
+		var cur = 0;
+		var speed = 0;
+		var allStop = true;
+		for (var attr in json)
+		{
+			if (attr == "opacity")
+			{
+				cur = Math.round(parseFloat(getStyle(obj,attr))*100);
+			}
+			else
+			{
+				cur = parseInt(getStyle(obj,attr));
+			}
+			speed = (json[attr]-cur)/6;
+			speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+			if (cur != json[attr])
+			{
+				allStop = false;
+			}
+			if (attr == "opacity")
+			{
+				obj.style.filter = "alpha(opacity = "+(cur+speed)+")";
+				obj.style.opacity = (cur+speed)/100;
+			}
+			else
+			{
+				obj.style[attr] = cur + speed + "px";
+			}
+		}
+		if (allStop)
+		{
+			clearInterval (obj.timer);
+			if (fun)
+			{
+				fun();
+			}
+		}
+	},30)
+}
+function getPos(ev)
+{
+	var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+	var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+	return {x:ev.clientX+scrollLeft,y:ev.clientY+scrollTop}
+}
+window.onload = function()
+{
+	var oDiv = document.getElementsByTagName("div");
+	var x = y = 0;
+	for (var i = 0;i < oDiv.length ; i++)
+	{
+		oDiv[i].style.left = 0 + "px";
+		//oDiv[i].style.top ==2 + "px";
+	}
+	document.onmousedown = function(ev)
+	{
+		var oEvent = ev || event ;
+		x = getPos(oEvent).x;
+		y = getPos(oEvent).y;
+		//alert(x);
+		for (var i = 0;i < oDiv.length ; i++)
+		{
+			oDiv[i].style.display = "none";
+			oDiv[i].style.left = x + "px";
+			oDiv[i].style.bottom = 0 + "px";
+		}
+		
+	}
+	document.onmouseup = function(ev)
+	{
+		for (var i = 0;i < oDiv.length ; i++)
+		{
+			oDiv[i].style.display = "block";
+			oDiv[i].style.left = x + "px";
+			//oDiv[i].style.top = 0 + "px";
+		}
+		for (var i = 0; i < oDiv.length ; i++)
+		{
+			startMove(oDiv[i],{"top":y-i*oDiv[0].offsetHeight},false);
+		}
+		//startMove(oDiv[]);
+	}
+}
+</script>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>

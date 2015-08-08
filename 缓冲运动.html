@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD//XHTML1.0 Strict//EN" "http://www.w3.org/TR/XHTML1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8"></meta>
+<title>缓冲运动</title>
+<style>
+#div1 {width:150px;height:150px; background:red;position:absolute;left:0px;}
+#div2 {width:1px;height:600px; background:black;position:absolute;left:300px;top:0px;}
+#div3 {width:1px;height:600px; background:black;position:absolute;left:600px;top:0px;}
+</style>
+<script>
+var timer = null;
+function startMove(iTarget)
+{
+	var speed = 0;
+	var oDiv = document.getElementById('div1');	
+	clearInterval(timer);
+	var oTxt = document.getElementById('recorder');
+	timer = setInterval (function()
+	{
+		speed = (iTarget - oDiv.offsetLeft)/20 ;	
+		speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+		oTxt.value = speed;
+		if (oDiv.offsetLeft == iTarget)
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			oDiv.style.left = oDiv.offsetLeft + speed + "px";
+		}
+		
+	},30)
+}
+window.onload = function()
+{
+	var target = true;
+	var oDiv = document.getElementById('div1');
+	var oBt1 = document.getElementById('bt1');
+	oBt1.onclick = function()
+	{
+		if (target)
+		{
+			target = false;
+		}
+		else
+		{
+			target = true;
+		}
+		if (target)
+		{
+			startMove(300);
+		}
+		else
+		{
+			startMove(600);
+		}
+
+	}
+}
+</script>
+</head>
+<body>
+<input type = "text" id = 'recorder'>
+<input type = "button" value = "开始运动" id = "bt1">
+<div id = "div1">
+</div>
+<div id = "div2">
+</div>
+<div id = "div3">
+</div>
+</body>
+</html>

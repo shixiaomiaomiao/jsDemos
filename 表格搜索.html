@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD//XHTML1.0 Strict" "http：//www.w3.org/TR/xhtml/dtd/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html;charset = utf-8" ></meta>
+<title>表格搜索</title>
+<style>
+#container {width:510px;margin:20px auto;}
+#search {width:200px ; height: 20px;}
+#table {margin-top:10px;text-align:center;clear:both;}
+#choice {margin-top:10px;font-size:12px;margin-left:10px;}
+</style>
+<script>
+window.onload = function()
+{
+	var oTab = document.getElementById('table');
+	var oHigh = document.getElementById("highlight");
+	var oBtSearch = document.getElementById("bt1");
+	var oBtLow = document.getElementById("low");
+	var oBtBlur = document.getElementById('blur');
+	var oBtM = document.getElementById('multiple');
+	var oTxt = document.getElementById('search');
+	oBtSearch.onclick = function()
+	{
+		var input = [oTxt.value];		
+		//是否进行多关键词分割
+		if (oBtM.checked)
+		{
+			input = input[0].split (' ');
+		}
+		for ( var i = 0 ; i < oTab.tBodies[0].rows.length ; i++)
+		{	
+			oTab.tBodies[0].rows[i].style.background = "";
+			oTab.tBodies[0].rows[i].style.visibility = "visible";
+			var equal = false;
+			for (var j = 0; j < input.length ; j++ )
+			{
+				var outTxt = input[j];
+				var inTxt = oTab.tBodies[0].rows[i].cells[1].innerHTML;
+				
+				//是否忽略大小写
+				if (oBtLow.checked)
+				{
+					outTxt = outTxt.toLowerCase();
+					inTxt = inTxt.toLowerCase();
+				}
+				//模糊搜索
+				if (oBtBlur.checked)
+				{
+					if (inTxt.search(outTxt) != -1)
+						{
+							equal = true;
+							
+						}
+				}
+				else
+				{
+					if (outTxt == inTxt)
+						{
+							equal = true;		
+						}
+				}
+
+			}
+		if (equal)
+		{
+			if (oHigh.checked)
+			{
+				oTab.tBodies[0].rows[i].style.background = "yellow";
+			}
+			else
+			{
+				oTab.tBodies[0].rows[i].style.visibility = "visible";
+			}
+		}
+		else
+		{
+			if (oHigh.checked)
+			{
+				oTab.tBodies[0].rows[i].style.background = "";
+			}
+			else
+			{
+				oTab.tBodies[0].rows[i].style.visibility = "hidden";
+			}
+		}
+			
+		}
+		//oTxt.value = "";
+	}
+	
+}
+</script>
+</head>
+<body>
+<div id = "container">
+	姓名：<input type = "text" id = "search">
+	<input type = "button" value = "搜索" id = "bt1">
+	<input type = "radio" id = "highlight" name = "kind" checked = "true">高亮
+	<input type = "radio" name = "kind">筛选
+	<div id = "choice">
+		<input type = "checkbox"  checked = "true" id = "low">忽略大小写
+		<input type = "checkbox"  checked = "true" id = "blur">模糊搜索
+		<input type = "checkbox"  checked = "true" id = "multiple">多关键词
+	</div>
+	<table id = "table" border = "1" width = "500" >
+		<thead>
+			<td>ID</td>
+			<td>姓名</td>
+			<td>年龄</td>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>张三</td>
+				<td>22</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>李四</td>
+				<td>21</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>王武</td>
+				<td>39</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>赵六</td>
+				<td>26</td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>Blue</td>
+				<td>37</td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td>Mark</td>
+				<td>57</td>
+			</tr>
+			<tr>
+				<td>7</td>
+				<td>王四</td>
+				<td>33</td>
+			</tr>
+			<tr>
+				<td>8</td>
+				<td>王三</td>
+				<td>41</td>
+			</tr>
+			<tr>
+				<td>9</td>
+				<td>bmw</td>
+				<td>27</td>
+			</tr>
+			
+		</tbody> 
+	</table>
+</div>
+</body>
+</html>

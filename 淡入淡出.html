@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html ; charset = utf-8"></meta>
+<title>淡入淡出</title>
+<style>
+#div1 {width:300px ; height:300px;background:red;filter:alpha(opacity = 30);opacity:0.3;margin:20px auto;}
+</style>
+<script>
+var timer = null;
+var alpha = 30;
+function startMove(iTarget)
+{
+	var speed = 0;
+	var oDiv = document.getElementById('div1');
+	if (iTarget < alpha)
+	{
+		speed = -10;
+	}
+	else
+	{
+		speed = 10;
+	}
+	clearInterval(timer);
+	timer = setInterval (function()
+	{
+		if (alpha == iTarget)
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			alpha += speed ;
+			oDiv.style.filter = "alpha(opacity = " + alpha + ")";
+			oDiv.style.opacity = alpha/100 ;
+		}
+	},30)
+}
+window.onload = function()
+{
+	var oDiv = document.getElementById('div1');
+	oDiv.onmouseover = function()
+	{
+		startMove(100);
+	}
+	oDiv.onmouseout = function()
+	{
+		startMove(30);
+	}
+}
+</script>
+</head>
+<body>
+<div id = "div1">
+<div>
+</body>
+</html>

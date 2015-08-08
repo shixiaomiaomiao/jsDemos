@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8"></meta>
+<title>提交留言</title>
+<style>
+#container {width:300px;height:400px;margin:20px auto;}
+</style>
+<script>
+window.onload = function()
+{
+	var oTxt1 = document.getElementById("txt1");
+	var oBt1 = document.getElementById("bt1");
+	var oTxt2 = document.getElementById("txt2");
+	document.onkeydown = function(ev)
+	{
+		var oEvent = ev || oEvent;
+		if (ev.keyCode == 13)
+		{
+			if(oTxt1.value)
+			{
+				oTxt2.value += oTxt1.value + "\n";
+			}
+			oTxt1.value = "";
+		}
+	}
+	oBt1.onclick = function()
+	{
+		if(oTxt1.value)
+		{
+			oTxt2.value += oTxt1.value + "\n";
+		}
+		oTxt1.value = "";
+	}
+}
+</script>
+</head>
+<body>
+<div id = "container"> 
+<input type = "text" id = "txt1">
+<input type = "button" id = "bt1" value = "提交(Enter)">
+<textarea cols = "25" rows = "10" id = "txt2"></textarea>
+</div>
+</body>
+</html>

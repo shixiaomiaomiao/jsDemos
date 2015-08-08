@@ -1,0 +1,47 @@
+<!DICTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strcit.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8"></meta>
+<title>自定义右键菜单</title>
+<style>
+*{margin:0px;padding:0px;list-style-type:none;}
+#content {width:80px;height:110px;border:1px solid #333;background:#ccc;position:absolute;display:none;}
+#content ul li{width:78px;height:20px;border:1px dashed #666;text-align:center;}
+</style>
+<script>
+function getPos(ev)
+{
+	var scrollTop = document.documentElement.scrollTop || document.body.scrollTop ;
+	var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft ;
+	return {x:ev.clientX+scrollLeft , y:ev.clientY+scrollTop}
+}
+document.oncontextmenu = function(ev)
+{
+	var oDiv = document.getElementById("content");
+	var oEvent = ev || event;
+	var x = getPos(oEvent).x;
+	var y = getPos(oEvent).y;
+	oDiv.style.display = "block";
+	oDiv.style.left = x + "px";
+	oDiv.style.top = y + "px";
+	return false;   //阻止系统自带的右键菜单
+}
+document.onclick = function()
+{
+	var oDiv = document.getElementById("content");
+	oDiv.style.display = "none";
+}
+</script>
+</head>
+<body>
+<div id = "content">
+	<ul>
+		<li>aaa</li>
+		<li>bbb</li>
+		<li>ccc</li>
+		<li>ddd</li>
+		<li>eee</li>
+	</ul>
+</div>
+</body>
+</html>

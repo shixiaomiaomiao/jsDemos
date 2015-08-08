@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html ; charset = utf-8"></meta>
+<title>去html标签</title>
+<style>
+#container {width:400px;height:300px;margin:20px auto;}
+</style>
+<script>
+window.onload = function()
+{
+	var oTxt1 = document.getElementById("txt1");
+	var oTxt2 = document.getElementById("txt2");
+	var oBt1 = document.getElementById("bt1");
+	var oBt2 = document.getElementById("bt2");
+	
+	oBt1.onclick = function()
+	{
+		var re = /<[^<>]+>/g ;  //正则表达式中不可以有空格，不然都会进行匹配
+		var space = /&nbsp;/g ;		
+		var str = oTxt1.value.replace(re,'');
+		oTxt2.value = str.replace(space,' ');
+		oTxt1.value = '';
+	}
+	oBt2.onclick = function()
+	{
+		var re = /&quot;/g ;  //正则表达式中不可以有空格，不然都会进行匹配
+		//var space = /&nbsp;/g ;		
+		var str = oTxt1.value.replace(re,'');
+		oTxt2.value = str;
+		oTxt1.value = '';
+	}
+}
+</script>
+</head>
+<body>
+<div id = "container">
+	<textarea id = "txt1" rows = "10" cols = "40"></textarea>
+	<input type = "button" id = "bt1" value = "过滤"/>
+	<input type = "button" id = "bt2" value = "过滤字符实体"/>
+	<textarea id = "txt2" rows = "10" cols = "40"></textarea>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,663 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict //EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8"></meta>
+<title> 智能社之JavaScript总结</title>
+<link href = "js.css" type = "text/css" rel = "stylesheet" >
+<script src = "js.js" style = "text/javascript" charset = "utf-8"></script>
+</head>
+
+<body>
+	<div id = "skin">
+		<li>深沉黑</li>
+		<li>优雅粉</li>
+		<li>薄荷绿</li>
+		<li>绅士蓝</li>
+		<ul>换肤
+		</ul>
+	</div>
+	<div id = "container">
+		<ul class = "title">
+			<li class = "active">基础入门</li>
+			<li>基础应用</li>
+			<li>DOM应用</li>
+			<li>Js运动技术</li>	
+			<li>Js事件应用</li>	
+			<li>Ajax无刷新数据读取技术</li>	
+			<li>Js中的面向对象</li>	
+			<li>其他知识</li>	
+		</ul>
+		<div id = "content">
+			<div id = "content1" class = "class1" >
+				<li>
+					<b>课时1</b>&nbsp&nbsp 初探JavaScript魅力1
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>  1.Js是用来给网页添加交互和功能的。
+					</br>2.<a href = "鼠标提示框.html" target = "_blank" title = "鼠标提示框" >鼠标提示框</a>
+					</br>3.div.style.xx在火狐下不兼容，一定要先用document.getElementById()获取div元素后再修改
+					</p>
+				</ul>
+				<li>
+					<b>课时2</b>&nbsp&nbsp 初探JavaScript魅力2
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.任何标签都可以加id，包括link和html
+					</br>2.任何标签的任何属性都可以被修改
+					</br>3.HTML里面怎么写，Js里就怎么写，唯一的例外是class（html中），在Js中是className.
+					</br>4.a中也可以添加Js,只是不建议使用，一般a中的空连接也不用"#",而是"href = '`1'"
+					</br>5.网页换肤其实就是更换link中的css
+					</p>
+				</ul>
+				<li>
+					<b>课时3</b>&nbsp&nbsp 初探JavaScript魅力3
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.函数传参：参数就是占位符
+					</br>2.<a href = "提取行间事件.html" target = "_blank" title = "提取行间事件">提取行间事件</a>
+					</br>3.操作属性的方法有两种：一种是'.'（这是最常用的方法，但是无法用于属性是变化的情况），
+					<b>另一种是'[]'（这种方法常用于需要修改的属性不固定时）</b>
+					</p>
+				</ul>
+				<li>
+					<b>课时4</b>&nbsp&nbsp 初探JavaScript魅力4
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.用style操作的都是行间样式，而且style也只能操作行间样式
+					</br>2.样式优先级：*(通配符) &lt 标签 &lt class &lt ID &lt 行间，
+						所以，当设置完style（行间样式）后，再去修改className不会有效果
+					</br>建议：对于同一个div,span,从始至终都只操作style或只操作class
+					</br>3.行为（js）、样式（css）、结构（html）三者分离。所以不要加行间样式和行间事件。
+					</br>所以使用window.onload来执行js事件
+					</br>4.getElementsByTagName用来获取一组元素
+					</br>5.<a href = "勾选框.html" target = "_blank" title = "勾选框">勾选框</a>
+					</p>
+				</ul>
+				<li>
+					<b>课时5</b>&nbsp&nbsp 初探JavaScript魅力5
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.通过html加入的自定义标签属性会被浏览器过滤
+					</br>2.通过Js加入的自定义属性可以被浏览器接受
+					</br>3.文本输入框（input中type = "text"）直接使用oTxt.value就可以获取输入框中的文字
+					</p>4.<a href = "../plan/plan.html" title = '仿年历之假期计划表' target = "_blank">仿年历之假期计划表</a>
+				</ul>
+			</div>
+			
+			<div class = "class1" id = "content2">
+				<li>
+					<b>课时1</b>&nbsp&nbsp JavaScript基础-01
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.Javascript 是由三大部分组成的：ECMA,DOM,BOM
+					</br>ECMA:用于翻译，相当于解释器。几乎没有兼容性问题。
+					</br>DOM：Document Object Model,用来操作HTML的。有一些操作不兼容。
+					</br>BOM：Browser Object Model,浏览器对象模型。没有兼容问题，完全不兼容。
+					</br>2.用typeof来读取变量类型
+					</br>3.js的数据类型有：number,string ,boolean ,function
+					</br>4.一个变量应该至存放一种类型的数据
+					</br>5.类型转换：
+					</br>(1)强制类型转换
+					</br>&nbsp&nbsp&nbsp&nbsp a.paseInt(x):将字符串转成数字（整数）
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp (从左向右看，一旦碰到非数字即跳出)
+					</br>&nbsp&nbsp&nbsp&nbsp b.NaN：非数字
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp any + NaN = NaN
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	NaN和NaN不相等。
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	isNaN(x):用于判断x是否是非数字.
+					</br>&nbsp&nbsp&nbsp&nbsp	c.parseFloat:转换成小数或整数
+					</br>(2)隐式类型转换
+					</br>&nbsp&nbsp&nbsp&nbsp a. == ：转化成相同类型后再比较
+					</br>&nbsp&nbsp&nbsp&nbsp b.=== ：强制比较，不转化类型直接比较
+					</br>&nbsp&nbsp&nbsp&nbsp c.减法
+					</p>
+				</ul>
+				<li>
+					<b>课时2</b>&nbsp&nbsp JavaScript基础-02
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.json和数组之间的关系和区别:
+					</br>&nbsp&nbsp	1.json的下标是字符串， 数组下标是数字。 
+					</br>&nbsp&nbsp	2 数组里有个重要属性length， json没有length，json是简单数据，呈现的是所写入的。
+					</br>&nbsp&nbsp 3.json的循环怎么做到呢？ for (var i in arr) 仿照数组这种
+					</br>2.三目运算符： ？： （if/else的简称）
+						</br>&nbsp&nbsp	条件？语句1：语句2
+						</br>&nbsp&nbsp	条件成立，执行语句1，条件不成立，执行语句2.
+					</br>3.真：true、非0数字、非空字符串、非空对象
+					</br>&nbsp&nbsp假：false、数字0、空字符串、空对象、undefined
+					</br>4.break 中断，整个 continue 继续，跳过本次，继续其他
+					</br>5.匈牙利命名法：类型开头、首字母大写
+					</p>
+				</ul>
+				<li>
+					<b>课时3</b>&nbsp&nbsp 深入JavaScript
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.函数返回值：一个函数应该只返回一种类型的值。
+					</br>2.函数传参（不定参）：arguments,是一个数组，可以传入无数个参数
+					</br>3.获取非行间样式：(只能获取单一样式，不能获取复合样式，如：border,background等，并且不能用来设置)
+					</br>&nbsp&nbsp function getStyle(obj,name)
+					</br>&nbsp&nbsp&nbsp {
+					</br>&nbsp&nbsp&nbsp&nbsp if (obj.currentStyle)
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	{
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp return obj.currentStyle[name];
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp		}
+					</br>&nbsp&nbsp&nbsp&nbsp		else
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp {
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp return getComputedStyle(obj,false)[name];
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp		}
+					</br>&nbsp&nbsp&nbsp  }
+					</br>4.数组var a = [1,3,4,3];
+					</br>&nbsp&nbsp	属性：a.length
+					</br>&nbsp&nbsp		可以对a.length进行赋值
+					</br>&nbsp&nbsp		eg:a.length = 2 => a = [1,3](当a.length设为0时，即可清空数组)
+					</br>&nbsp&nbsp	(1)数组元素添加：
+					</br>&nbsp&nbsp&nbsp&nbsp i.从尾部添加：a.push(33)
+					</br>&nbsp&nbsp&nbsp&nbsp		ii.从头部添加：a.unshift(33);
+					</br>&nbsp&nbsp	(2)数组元素删除：
+					</br>&nbsp&nbsp&nbsp&nbsp i.从尾部删除：a.pop();
+					</br>&nbsp&nbsp&nbsp&nbsp ii.从头部删除：a.shift();
+					</br>&nbsp&nbsp	(3).数组的切片:splice
+					</br>&nbsp&nbsp&nbsp&nbsp a.连续删除元素:splice (起点，长度)
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	eg: var a = [1,2,3,4,5,6];
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp a.splice(1,2)  =>a = [1,4,5,6]
+					</br>&nbsp&nbsp&nbsp&nbsp b.插入元素：splice(起点，0，待插元素)
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	eg: var a = [1,2,3,4,5,6];
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp a.splice(1,0,9,7) => a = [1,9,7,2,3,4,5,6];
+					</br>&nbsp&nbsp&nbsp&nbsp c.替换元素：splice (起点，长度，替换元素)
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp eg: var a = [1,2,3,4,5,6];
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp a.splice(2,2,"a"); => a =[1,2,a,5,6];
+					</br>&nbsp&nbsp&nbsp&nbsp e.数组元素的连接： join(这个方法审查不通过哟，待检验)
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp eg: var a = [1,2,3,4];
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp a.join('-')
+					</br>&nbsp&nbsp&nbsp&nbsp f.排序；sort(参数） （参数为函数，即比较函数）
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp（1）从小到大
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp eg: var a = [4,2,1];
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp a.sort(function(n1,n2){return n1-n2;})  => a = [1,2,4]
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp（2）从大到小
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp eg: var a = [4,2,1];
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	 a.sort(function(n1,n2){return n2-n1;})  =>  a = [4,2,1]
+					</br>&nbsp&nbsp&nbsp&nbsp g.数组连接:concat 
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp eg:	var a = [1,6,3];
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	var b = ["dd","ff"];
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	var c = a.concat(b);   => c = [1,6,3,"dd","ff"]
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	var d = b.concat(a);   => d = ["dd","ff",1,6,3]
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	注： 数组 a 和 b 不变
+					</p>
+				</ul>
+				<li>
+					<b>课时4</b>&nbsp&nbsp 定时器的使用01
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>
+					1.定时器有两种：（1）间隔型：setInterval(function,t)（2）延时型：setTimeout(function,t).
+					其中t均已ms为单位
+					</br>2.对应的两种关闭定时器的函数:（1）clearInterval(timer)（2）clearTimeout（timer）
+					</br>3.间隔型定时器demo:&nbsp&nbsp
+					<a href = "../cool-clock/clock.html" title = "超酷时钟" target = "_blank">超酷时钟</a>
+					</br>4.延时型定时器demo:&nbsp&nbsp
+					<a href = "延时提示框.html" title = "延时提示框" target = "_blank">延时提示框</a>	
+					</p>
+				</ul>
+				<li>
+					<b>课时5</b>&nbsp&nbsp 定时器的使用02
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>
+					<a href = "../move/move.html" title = "无缝滚动" target = "_blank" >无缝滚动</a>
+					</p>
+				</ul>
+			</div>
+			
+			<div  class = "class1" id = "content3">
+				<li>
+					<b>课时1</b>&nbsp&nbsp DOM基础
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.DOM就是操作页面的document。
+					</br>2.浏览器支持：FF99%支持，IE10%支持，Chrome60%支持。
+					</br>3.获取子节点（子节点只算第一层的）：
+						</br>&nbsp&nbsp （1）childNodes(是一个数组，里面存放的是子节点，有length属性)
+						</br>&nbsp&nbsp&nbsp&nbsp eg. a.childNodes在IE6-8下只包含元素节点,而在chrome和IE9下，还包括文本节点。
+						</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 一般使用时，加一下if判断,a.childNodes.nodeType==3（文本节点），a.childNodes.nodeType==1(元素节点)
+						</br>&nbsp&nbsp （2）（强烈建议使用）children也可以获取子节点，而且不包括文本节点，并且各浏览器都是兼容的。
+						</br>&nbsp&nbsp<b>注意：</b>children是一个数组
+						</br>4.parentNode:元素的父节点 
+						</br>&nbsp&nbsp demo ： &nbsp <a href = "隐藏.html" title = "隐藏" target = "_blank">隐藏</a>
+						</br>5.offsetParent:用来寻找该元素用于定位的父级。css中绝对定位元素，
+						根据有定位的父元素进行定位，若直接父级无定位，则继续向上一级寻找，直至到body为止。
+						</br>6.firstChid（IE6-8）与firstElementChild（高级浏览器）均是第一个子节点，
+							 可以一起作用来解决浏览器兼容性问题。 
+							 可以通过if判断，if (oUl.firstChild)存在，则赋值。else,对oUl.firstElementChild赋值。
+						</br>7.兄弟节点：nextSibling和nextElementSibling,previousSibling和previousElementSibling
+						</br>&nbsp 最后一个子节点:lastChild和lastElementChild。
+						</br>&nbsp 他们的用法和firstChild一样，配合一起使用来解决浏览器兼容性问题。
+						</br>8.DOM操作元素方法：
+						</br>&nbsp&nbsp（1）获取：getAttribute(名称)
+						</br>&nbsp&nbsp（2）设置：setAttribute(属性名称，值)
+						</br>&nbsp&nbsp（3）删除：removeAttribute(名称)
+						</br>9.用className选择元素
+						</br>&nbsp&nbsp	function getByClass(oParent, sClass)
+						</br>&nbsp&nbsp {
+						</br>&nbsp&nbsp&nbsp&nbsp var aResult = [];
+						</br>&nbsp&nbsp&nbsp&nbsp var aEle = oParent.getElementsByTagName('*');  //使用通配符，可以选出oParent下的所有标签
+						</br>&nbsp&nbsp&nbsp&nbsp for (var i = 0;i < aEle.length ; i++)
+						</br>&nbsp&nbsp&nbsp&nbsp&nbsp {
+						</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp if (aEle[i].className == sClass)
+						</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp {
+						</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	aResult.push(aEle[i]);
+						</br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp }
+						</br>&nbsp&nbsp&nbsp&nbsp&nbsp }
+						</br>&nbsp&nbsp&nbsp&nbsp return aResult;								
+						</br>&nbsp&nbsp }
+					</p>
+				</ul>
+				<li>
+					<b>课时2</b>&nbsp&nbsp DOM操作应用
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.创建DOM元素：createElement(标签)
+					</br>2.插入DOM元素：（1）从后面添加:appendChild（2）把元素插入到指定元素的前面：insertBefore(子节点，指定元素)
+					</br>3.删除DOM元素：removeChild(待删子节点)
+					</br>&nbsp&nbspdemo : <a href = "发微博.html" title = "发微博" target = "_blank">发微博</a>
+					</br>4.文档碎片：将所有要创建的元素先一次性创建到一个数组里，最后一次性再添加到页面中
+					</br>&nbsp&nbsp文档碎片只在低级浏览器（IE6-8）上对性能有一定的提高,
+						在高级浏览器上基本没有作用，还有可能有副作用。目前这个已基本不怎么使用了。
+					</p>
+				</ul>
+				<li>
+					<b>课时3</b>&nbsp&nbsp DOM操作应用高级-1
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.表格由：table,thead,td,tbody,tr组成
+					</br>2.tbody如果不写，浏览器也会自动的给加上，但是为了布局的完整，强烈建议写上。
+					</br>3.在表格中，有获取所有的tbody,行，单元格的简便操作:.tBodies,.rows,.cells,tHead,tfoot
+					</br>&nbsp&nbsptBodies、rows、cells都是数组，而tHead,tFoot是一个元素（因为在表格中，tHead和tFoot都只能有一个）
+					</br>&nbsp&nbspdemo : <a href = "移入+隔行变色.html" title = "移入+隔行变色" target = "_blank">移入+隔行变色</a>
+					</br>4.表格的DOM操作demo : <a href = "添加+删除数据.html" title = "添加+删除数据" target = "_blank">添加+删除数据</a>
+					</p>
+				</ul>
+				<li>
+					<b>课时4</b>&nbsp&nbsp DOM操作应用高级-2
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.<a href = "表格搜索.html" target = "_blank" title = "表格搜索">表格搜索</a>
+					</br>2.<a href = "表格排序.html" target = "_blank" title = "表格排序">表格排序</a>
+					</br>3.表单事件(form)：onsubmit提交时发生，action是提交的地址;onreset重置时发生
+					</br>4.表单内容验证（待补）:
+					</br>&nbsp (1)阻止用户输入非法字符（组织事件）
+					</br>&nbsp (2)失去焦点时、输入时验证(onkeyup,onblur)
+					</br>&nbsp (3)提交时检查（onsubmit）
+					</br>&nbsp (4)*后数据检查
+					</p>
+				</ul>
+			</div>
+			
+			<div  class = "class1" id = "content4">
+				<li>
+					<b>课时1</b>&nbsp&nbsp Js运动基础-01
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.<a href = "匀速运动.html" title = '匀速运动' target = "_blank">匀速运动</a>
+					</br>2.<a href = "侧边栏.html" title = "侧边栏" target = "_blank">侧边栏</a>
+					</br>3.<a href = "淡入淡出.html" title = "淡入淡出" target = "_blank">淡入淡出</a>
+					</p>
+				</ul>
+				<li>
+					<b>课时2</b>&nbsp&nbsp Js运动基础-02
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.<a href = "缓冲运动.html" title = "缓冲运动" target = "_blank">缓冲运动</a>
+						:速度由大变小，与距离成正比。（一定要对速度进行取整操作！）
+					</br>2.<a href = "悬浮框.html" title = "悬浮框" target = "_blank">悬浮框</a>
+					</br>3.匀速运动停止条件：当物体运动到的当前距离与目标距离之差的绝对值（Math.abs）在一个speed之内，
+							就关闭定时器，同时将物体距离直接移到目标距离。
+					</br>&nbsp&nbsp		if (Math.abs(iTarget - oDiv.offsetLeft) == Math.abs(speed))
+					</br>&nbsp&nbsp&nbsp		{
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp			clearInterval(timer);
+					</br>&nbsp&nbsp&nbsp&nbsp&nbsp			oDiv.style.offsetLeft = iTarget + "px";
+					</br>&nbsp&nbsp&nbsp		}
+					</br>&nbsp&nbsp		else
+					</br>&nbsp&nbsp		...
+					</p>
+				</ul>
+				<li>
+					<b>课时3</b>&nbsp&nbsp Js运动应用-01
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p><a href = "任意值运动框架.html" title = "任意值运动框架" target = "_blank">任意值运动框架</a>
+					</p>
+				</ul>
+				<li>
+					<b>课时4</b>&nbsp&nbsp Js运动应用-02
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p><a href = "图片播放.html" title = "仿Flash图片播放" target = "_blank">仿Flash图片播放</a></P>
+				</ul>
+				<li>
+					<b>课时5</b>&nbsp&nbsp Js运动中级
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>链式运动框架 :<a href = "土豆悬浮效果.html" title = "土豆网的菜单悬浮效果" target = "_blank">
+					土豆网的菜单悬浮效果</a>
+					</br>完美运动框架 : <a href = "淘宝幻灯片.html" title = "淘宝幻灯片" target = "_blank">淘宝幻灯片</a>
+					</p>
+				</ul>
+			</div>
+			<div  class = "class1" id = "content5">
+				<li>
+					<b>课时1</b>&nbsp&nbsp Js事件基础
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.兼容的时间对象：var oEvent = ev || event ;
+					</br>2.事件冒泡：子级的事件发生以后会逐级向上传递，直至documnet为止。
+					</br>3.取消事件冒泡：oEvent.cancelBubble = true;
+					<a href = "仿select下拉框.html" title = "仿select下拉框" target = "_blank">仿select下拉框</a>
+					</br>4.鼠标移动事件：onmousemove;鼠标可视区的坐标:oEvent.clientX、oEvent.clientY;(当body的长高大于可视区时，紧跟鼠标移动的物体将与鼠标产生一定差距，原因是物体的div是根据body定位的，只有当可视区的顶部与body的顶部重合的时候，才会没有差距)
+					</br>一般当用到clientX、clientY时一定要加scrollTop（滚动条），来消除影响。
+					</br> var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+					</br> var scrollLeft = document.documentElement.scrollLeft||document.body.scrollLeft;
+					</br>5.<a href = "鼠标移动.html" title = "鼠标移动" target = "_blank">鼠标移动</a>
+					</br>6.键盘事件中用onkeydown事件捕捉,用oEvent.keyCode可以获得键盘按键的ASCII值。只有一个Fn键是无法获得键值。
+					</br>7.特殊键:ctrlKey(ctrl键)、shiftKey(shiftKey键)、altKey(alt键)
+					</br>8.<a href = "提交留言.html" title = "提交留言" target = "_blank">提交留言</a>
+					</p>
+				</ul>
+				<li>
+					<b>课时2</b>&nbsp&nbsp Js事件中级
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.默认行为：浏览器自带的行为（例如：右键会有菜单出现，当按键按下就会在文本框中显示 ）
+					</br>2.阻止默认行为：document.oncontextmenu = function()
+					</br>&nbsp&nbsp{
+					</br>&nbsp&nbsp&nbsp&nbsp	return false;	// 阻止系统菜单的出现
+					</br>&nbsp&nbsp}
+					</br>2.<a href = "自定义右键菜单.html" title = "自定义右键菜单"  target = "_blank">自定义右键菜单</a>
+					</br>3.<a href = "只接受数字的输入框.html" title = "只接受数字的输入框" target = "_blank">只接受数字的文本框</a>
+					</br>4.<a href = "简易拖拽.html" title = "简易拖拽" target = "_blank">简易拖拽</a>
+					</p>
+				</ul>
+				<li>
+					<b>课时3</b>&nbsp&nbsp Js事件高级应用-01
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记:</h2>
+					</br>
+					<p>
+					</br>1.事件绑定:对于同一个对象可以添加多个事件。
+						绑定函数:
+					</br>function myAddEvent(obj,ev,fn)
+					</br>&nbsp{
+					</br>&nbsp&nbsp;if (obj.attachEvent)    // 只在IE下起作用
+					</br>&nbsp&nbsp	 {
+					</br>&nbsp&nbsp&nbsp&nbsp;obj.attachEvent("on" + ev ,fun);	//IE下的绑定事件带"on"
+					</br>&nbsp&nbsp	 }
+					</br>&nbsp&nbsp;else
+					</br>&nbsp&nbsp	{
+					</br>&nbsp&nbsp&nbsp&nbsp;obj.addEventListener(ev,fun,false);  //addEventListener 绑定的时间名不带"on"
+					</br>&nbsp&nbsp	}
+					</br>&nbsp}
+				</br>2.<a href = "指定拖拽+磁性吸附.html" title = "指定拖拽+磁性吸附" target = "_blank">指定拖拽+磁性吸附
+					</a>
+					</br><b>3.父级有相对定位，子级才能用绝对定位。</b>
+					</br>4.图片拖拽时，如果图片的div中有文字，拖拽时会被选中。加上return false;可以解决chrome,FF,IE9下的这个问题，而在IE7以下的版本则无法解决。可以通过使用<b>事件捕获(只在IE下存在)</b>来解决该问题。
+					</br>5.<a href = "完美拖拽.html" title = "完美拖拽" target = "_blank">完美拖拽</a>
+					</p>
+				</ul>
+				<li>
+					<b>课时4</b>&nbsp&nbsp Js事件高级应用-02
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记:</h2>
+					</br>
+					<p>1.<a href = "带框拖拽.html" title = "带框拖拽" target = "_blank">简易带框拖拽</a>
+					</br>2.<a href = "自定义滚动条.html" title = "自定义滚动条" target = "_blank">自定义滚动条</a>
+					</p>
+				</ul>
+			</div>
+			<div  class = "class1" id = "content6">
+				<li>
+					<b>课时1</b>&nbsp&nbsp Ajax基础
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记:</h2>
+					</br>
+					<p>1.Ajax:无刷新读取服务器上的数据
+					</br>2.Ajax读取静态文件调用ajax.js(文件放于服务器的www中),function ajax(url,fnSucc,fnFailed)
+					</br>&nbspnbsp
+						url:要读取的文件的路径,fnSucc:读取成功以后执行的函数,fnFailed:读取文件失败以后执行的文件。
+					</br>eg:读取文件并将文件内容返回:ajax("aa.txt",function(str){alert(str)},function(){alert("失败")});
+					</br><b>注：在执行该html文件时，路径为：localhost/...(绝对路径将无法读取),另外存的文件名必须是英文的</b>
+					</br>3.字符集编码:要求html,js,和要读取的文件均是同一个编码的。建议使用utf-8编码。(另外还有中文编码:GB2312)
+					</br>4.缓存:对于同一个地址只读取一次.
+					</br>&nbsp&nbsp阻止缓存:一种方法是让URL地址一直变化.
+					</br>eg:ajax("aa.txt ? = " + new Date().getTime(),function(str){alert(str)},function(){alert("失败")}).
+					</br>5.<b>用ajax读取过来的任何数据都是以字符串的形式存在</b>
+					</br>6.eval(str):可以将str解析成JS可以识别的东西。
+					</br>7.表单提交的两种方法(method):get 和 post
+					</br>&nbsp&nbspget:通过网址上传(将数据放入url里，基本格式是：名字=值&名字=值...)，容量小(不适合上传大数据)，安全性差，有缓存。
+					</br>&nbsp&nbsppost:通过http Content传递,容量大，安全性好一点，没有缓存。
+					</br><b>一般,get方式用于获取数据(如浏览帖子)。post方式用于上传数据(如用户注册)</b>
+					</p>
+				</ul>
+				<li>
+					<b>课时2</b>&nbsp&nbsp Ajax中级
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>
+						1.Ajax的使用步骤:（类似于打电话）
+					</br>(1)创建Ajax对象（需要有手机这个物体）
+					</br>&nbsp&nbsp;var oAjax = new XMLHttpRequest();//在非IE6下兼容
+					</br>&nbsp&nbsp;var oAjax = new ActiveXObject('Microsoft.XMLHTTP');//在非IE6下兼容
+					</br>(2)连接到服务器（拨号）
+					</br>(3)发送请求（告诉服务器）（说话）
+					</br>(4)接收返回值（听对方说话）
+					</br>具体函数代码:
+					</br>function ajax(url,fnSucc,fnFailed)
+					</br>&nbsp;{ 
+					</br>&nbsp;	&nbsp;		 //创建一个对象
+					</br>&nbsp;	&nbsp;			 if(window.XMLHttpRequest)
+					</br>&nbsp;	&nbsp;&nbsp;			 {
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;				var oAjax = XMLHttpRequest();
+					</br>&nbsp;	&nbsp;&nbsp;			 }
+					</br>&nbsp;	&nbsp;			 else
+					</br>&nbsp;	&nbsp;&nbsp;			 {
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;				var oAjax = new ActiveXObject('Microsoft.XMLHTTP');
+					</br>&nbsp;	&nbsp;			 }
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;			 //连接服务器（拨号）open(方法,文件名,异步传输<一般都是异步>)
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;			 //异步传输:多个事情可以一起做;同步传输：事件一件件的做
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;			 oAjax.open('GET',url,true);
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;			 
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;			 //发送请求（告诉服务器）（说话）
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;			oAjax.send();
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;			//接收返回值（听对方说话）
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;			oAjax.onreadystatechange= function()
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			{
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				//返回的5种值:0:(未初始化)还没有调用open()方法
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				//1：（载入）已调用send()方法，正在发送请求
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				//2：（载入完成）send()方法完成,已收到全部响应内容
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				//3:(解析)正在解析响应的内容
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				//4:（完成）响应内容解析完成（不代表成功），可以在客户端调用
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				if(oAjax.readyState == 4)
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				{
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;					fnSucc(oAjax.responseText);
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				}
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				else
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				{
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;					if(fnFailed)
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;					{
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;						fnFailed(oAjax.status);
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;					}
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;				}
+					</br>&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			}
+						</br>&nbsp;	&nbsp;&nbsp;}
+					</p>
+	 			</ul>
+			</div>
+			<div  class = "class1" id = "content7">
+				<li>
+					<b>课时1</b>&nbsp&nbsp Js面对对象基础-01
+				</li>
+				<ul class = "class2" >
+				</ul>
+				<li>
+					<b>课时2</b>&nbsp&nbsp Js面对对象基础-02
+				</li>
+				<ul class = "class2" >
+				</ul>
+				<li>
+					<b>课时3</b>&nbsp&nbsp Js面对对象实例
+				</li>
+				<ul class = "class2" >
+				</ul>
+				<li>
+					<b>课时4</b>&nbsp&nbsp Js面对对象高级
+				</li>
+				<ul class = "class2" >
+				</ul>
+			</div>
+			<div  class = "class1" id = "content8">
+				<li>
+					<b>课时1</b>&nbsp&nbsp BOM应用
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记:</h2>
+					</br>
+					<p>1.BOM是用来操作浏览器的,其基本功能有打开(open)和关闭(close)窗口。
+					</br>2.<a href = "简易运行代码窗口.html" title = "简易运行代码窗口" target = "_blank">简易运行代码窗口</a>
+					</br>3.document是属于window的属性，document.write是先将页面清空再写入。
+					</br>4.window.open(新页面的地址,打开方式(类似于a，有如_blank))是有返回值的，返回的是新的页面窗口。
+					</br>5.window.close();的bug:(1)单独出现close时，在Chrome正常运行，在IE下会有提示信息，早FireFox下会提示错误"不允许脚本关闭非脚本打开的窗口",原因是在火狐下无法关闭一个由用户打开的窗口，只能关闭由window.open()打开的窗口。(2)解决方法是:window.open和window.close成对出现。
+					</br>6.window.navigator.userAgent显示浏览器的版本信息。
+					</br>7.window.location代表的是当前网页的地址，还可以对其进行赋值(可以应用于翻页的网页刷新以后仍然停留在当前页面而非首页)。
+					</p>
+					<h3>可视区尺寸(不包括滚动条，只与窗口大小有关)</h3>
+					<p>1.可视区宽高:document.documentElement.clientWidth 、document.documentElement.clientHeight
+					</br>2.滚动距离:document.documentElement.scrollTop(IE和FF下兼容) || document.body.scrollTop(Chrome下兼容,且Chrome下整百滚动);
+					</p>
+					<h3>固定定位</h3>
+					<p>1.在不是IE6的浏览器中，用position:fixed;即可，在IE6中可以使用运动框架，保持物体的相对位置不变
+					</br>2.window.onresize:页面大小改变的事件。
+					</br>3.用window.navigator.userAgent来判断浏览器的版本。
+					<h3>系统对话框</h3>
+					<p>1.alert:没有返回值，只有一个"确认"按钮
+					</br>2.confirm : 确认对话框 ，有"确定"、"取消"两个按钮,有返回值（确定返回true，取消和关闭窗口都返回false）。
+					</br>3.prompt("输入的提示信息"，"输入的默认信息"):输入对话框,有返回值，返回用用户输入的字符串或null;
+					</p>		
+				</ul>
+				<li>
+					<b>课时2</b>&nbsp&nbsp COOKIE基础与应用
+				</li>
+				<ul class = "class2" >
+				</ul>
+				<li>
+					<b>课时3</b>&nbsp&nbsp Js中的正则表达式
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记:</h2>
+					</br>
+					<h3>字符串的操作</h3>
+					<p>1.查找并返回位置:search,用法: str.search(需要查找的字符).如果需要查找的是一个字符，找到则返回该字符在字符串中的位置，找不到则返回-1.如果需要查找的是一个字符串，若在str中找到完全相同的字符串，则返回该字符串的的首字符在str中的位置。若找不多，则返回-1.
+					</br>2.截取:subString,用法:str.subString(起始位置，终止位置)。若起始位置的数小于0，则从0开始；若终止位置的数大于str.length则按str.length来算;若终止位置的数不写的话，默认为str.length;
+					</br>
+					3.查找并返回字符:charAt,用法:str.charAt(字符所在的位置)，若位置超出字符串，则返回空
+					</br>
+					4.分割字符串:split,用法:str.split(分割的标志)，将字符串切成数组。
+					</p>
+					</br>
+					<h3>正则表达式:强大的字符串匹配工具。</h3>		
+					<p>1.search：var re = \a\;  //代表字符a
+					</br>&nbsp&nbspstr.search(re);
+					</br>2.match:把所有匹配的东西全部提取出来，放入数组。
+					</br>转义字符\d : 代表数字
+					</br> i : 忽略大小写。
+					</br>全局匹配(全部匹配): g
+					</br> + :量词若干。
+					</br>3.replace : <a href = "敏感词过滤.html" title = "敏感词过滤" target = "_blank">敏感词过滤</a>
+					</br>4.元字符(方括号): 可以代表"或",也可以代表范围。
+					</br> &nbsp<a href = "去html标签.html" title = "去html标签" target = "_blank">去html标签</a>
+					<table border = "1" width = "500" height = "70" style = "text-align:center;">
+						<thead >
+							<td colspan = "2">转义字符</td>
+						 </thead>
+						<tbody>
+							<tr>
+								<td>.</td>
+								<td>任意字符</td>
+							</tr>
+						    <tr>
+								<td>\d</td>
+								<td>数字0-9</td>
+							</tr>
+							<tr>
+								<td>\w</td>
+								<td>[0-9a-z_]英文、数字、下划线</td>
+							</tr>
+							<tr>
+								<td>\s</td>
+								<td>空白字符(空格，tab等不可打印不可显示的字符)</td>
+							</tr>
+							<tr>
+								<td>\D</td>
+								<td>[^0-9](除了0-9之外的所有字符)</td>
+							</tr>
+							<tr>
+								<td>\W</td>
+								<td>[^0-9a-z_](除了英文、数字、下划线以外的所有字符)</td>
+							</tr>
+							<tr>
+								<td>\S</td>
+								<td>非空白字符</td>
+							</tr>
+						</tbody>
+					</table>
+					</p>
+				</ul>
+			</div>			
+		</div>
+	</div>
+</body>
+</html>

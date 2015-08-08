@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3//DTD//XHTML1.0 strict //EN" "http://wwww.w3.org/TR/xhtml/DTD//xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html ; charset = utf-8"></meta>
+<title>勾选框</title>
+<style>
+#container { width: 300px; margin:20px auto;}
+#check {width:10px;}
+</style>
+<script>
+window.onload = function()
+{
+	var oBtn1 = document.getElementById("btn1");
+	var oBtn2 = document.getElementById("btn2");
+	var oBtn3 = document.getElementById("btn3");
+	var oCheck = document.getElementById('check');
+	var aBox = oCheck.getElementsByTagName('input');
+	oBtn1.onclick = function()
+	{
+		for ( var i = 0 ; i < aBox.length ; i++)
+		{
+			aBox[i].checked = true;
+		}
+	}
+	oBtn2.onclick = function()
+	{
+		for ( var i = 0 ; i < aBox.length ; i++)
+		{
+			aBox[i].checked = false;
+		}
+	}
+	oBtn3.onclick = function()
+	{
+		for ( var i = 0 ; i < aBox.length ; i++)
+		{
+			if (aBox[i].checked)
+			{
+				aBox[i].checked = false;
+			}
+			else
+			{
+				aBox[i].checked = true;
+			}
+		}
+	}
+}
+</script>
+</head>
+
+<body>
+<div id = "container">
+	<input id = 'btn1' type = "button" value = "全选" >
+	<input id = 'btn2' type = "button" value = "不选">
+	<input id = 'btn3' type = "button" value = "反选">
+	<div id = "check">
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >
+		<input type = "checkbox" >		
+	</div>
+<div>
+
+</body>
+</body>
+</html>

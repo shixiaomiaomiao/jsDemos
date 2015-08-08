@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD//XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html ; charset = utf-8"></meta>
+<title>变色圣诞树</title>
+<style>
+body {background:#666 ;}
+#container{margin:100px auto;width:400px; }
+#tri1{ 
+			width:0px;
+			border-width:60px ;
+			border-style:solid;
+			border-color:transparent;
+			border-bottom-color:#006600;
+			margin:0px auto;
+			 }
+#tri2{ 
+			width:0px;
+			border-width:100px ;
+			border-style:solid;
+			border-color:transparent;
+			border-bottom-color:#006600;
+			margin:-140px auto;
+			 }
+#tri3{ 
+			width:0px;
+			border-width:120px ;
+			border-style:solid;
+			border-color:transparent;
+			border-bottom-color:#006600;
+			margin:-190px auto;
+			 }
+#tri4{ 
+			width:65px;
+			height:120px;
+			background-color:#800000;
+			margin:190px auto;
+			 }
+			 
+</style> 
+<script>
+var colorArray = ['#006600','yellow','red','pink','purple ','blue ','#ff2080'];
+var i = 0;
+window.onload = function()
+{
+	var divArray = [];
+	var oDiv1 = document.getElementById('tri1');
+	divArray.push(oDiv1);
+	var oDiv2 = document.getElementById('tri2');
+	divArray.push(oDiv2);
+	var oDiv3 = document.getElementById('tri3');
+	divArray.push(oDiv3);
+	setInterval(function()
+	{
+		i = i%7;
+		for (var j =0 ; j < divArray.length ; j++)
+		{
+			
+			divArray[j].style["border-bottom-color"] = colorArray[i];
+		}
+		i += 1;
+	}
+	,200)
+}
+</script>
+
+</head>
+
+<body>
+<div id = "container">
+	<div id = "tri1"></div>
+	<div id = "tri2"></div>
+	<div id = "tri3"></div>
+	<div id = "tri4"></div>
+</div>
+</body>
+</body>
+</html>

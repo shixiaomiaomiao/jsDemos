@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html ; charset = utf-8"></meta>
+<title>css画出各种基本图形</title>
+<style>
+*{padding:0px;margin:0px;}
+div{float:left;margin:15px;}
+.square{width:100px;height:100px;background:red;}
+/*正方形也可以*/
+/*{width:0px;height:0px;border:50px solid red;}*/
+.rectangle{width:200px;height:100px;background:green;}
+
+.triangle1{width:0px;height:0px;border:50px solid transparent;border-top:50px solid pink;}
+.triangle2{width:0px;height:0px;border:50px solid transparent;border-right:50px solid purple;}
+.triangle3{width:0px;height:0px;border:50px solid transparent;border-bottom:50px solid blue;}
+.triangle4{width:0px;height:0px;border:50px solid transparent;border-left:50px solid lightblue;}
+
+.triangle5{width:0px;height:0px;border:50px solid transparent;
+border-left:50px solid #e4f;
+border-top:50px solid #e4f;}
+.triangle6{width:0px;height:0px;border:50px solid transparent;
+border-right:50px solid #cde;
+border-top:50px solid #cde;}
+.triangle7{width:0px;height:0px;border:50px solid transparent;
+border-left:50px solid #c20;
+border-bottom:50px solid #c20;}
+.triangle8{width:0px;height:0px;border:50px solid transparent;
+border-right:50px solid #ee3;
+border-bottom:50px solid #ee3;}
+.triangle{width:0px;height:0px;border:50px solid transparent;
+border-top:50px solid red;
+border-right:50px solid yellow;
+border-bottom:50px solid green;
+border-left:50px solid orange;}
+
+.trapezoid{width:100px;height:0px;
+border-right:50px solid transparent;
+border-left:50px solid transparent;
+border-bottom:100px solid #c60;}
+.parallelogram{width:100px;height:100px;background:#ec3;
+-webkit-transform:skew(-20deg);
+-moz-transform:skew(-20deg);
+-o-transform:skew(-20deg);
+-ms-transform:skew(-20deg);}
+
+.test1{width:0px;height:0px;
+border:20px solid transparent;border-left:20px solid #000;}
+.test2{width:0px;height:0px;
+border:18px solid transparent;border-left:20px solid red;left:-82px;position:relative;}
+
+#star-five {
+position: relative;
+width: 0px;
+height: 0px;
+border-right: 100px solid transparent;
+border-bottom: 70px solid red;
+border-left: 100px solid transparent;
+-moz-transform: rotate(35deg);
+-webkit-transform: rotate(35deg);
+-ms-transform: rotate(35deg);
+-o-transform: rotate(35deg);
+}
+#star-five:before {
+border-bottom: 70px solid red;
+border-left: 100px solid transparent;
+border-right: 100px solid transparent;
+position: absolute;
+height: 0;
+width: 0;
+top: -0px;
+left: -99px;
+display: block;
+content: '';
+-webkit-transform: rotate(75deg);
+-moz-transform: rotate(75deg);
+-ms-transform: rotate(75deg);
+-o-transform: rotate(75deg);
+}
+#star-five:after {
+position: absolute;
+display: block;
+top: 3px;
+left: -105px;
+width: 0px;
+height: 0px;
+border-right: 100px solid transparent;
+border-bottom: 70px solid red;
+border-left: 100px solid transparent;
+-webkit-transform: rotate(-70deg);
+-moz-transform: rotate(-70deg);
+-ms-transform: rotate(-70deg);
+-o-transform: rotate(-70deg);
+content: '';
+}
+.single{width: 0px;
+height: 0px;border-right: 100px solid transparent;
+border-bottom: 70px solid red;
+border-left: 100px solid transparent;}
+.circle{width:100px;height:100px;background:#e22;border-radius:50px;}
+
+.circle1-1{width:0px;height:0px;
+border-radius:80px; 
+border-right:80px solid red;
+border-left:80px solid yellow;
+border-top:80px solid blue;
+border-bottom:80px solid pink;
+}
+
+.circle1-2{width:100px;height:100px;background:#fff;
+border-radius:100px; border:20px solid #699}
+/*上半圆*/
+.circle1-3{width: 100px; height: 0px;border:0 solid transparent;
+border-top:100px solid #439;
+border-right:100px solid #439;   
+-moz-border-radius: 100px 100px 0 0;
+-webkit-border-radius: 100px 100px 0 0; 
+ border-radius: 100px 100px 0 0;
+}
+
+/*下半圆*/
+.circle1-4{
+width:100px;height:0px;
+border-radius:0 0 100px 100px;
+-webkit-border-radius:0 0 100px 100px;
+-moz-border-radius:0 0 100px 100px;
+-ms-border-radius:0 0 100px 100px;
+-o-border-radius:0 0 100px 100px;
+border:0px solid red;
+border-bottom:100px solid #767;
+border-left:100px solid #767;}
+
+/*左半圆*/
+.circle1-5{width:0px;height:100px;
+border-radius:100px 0 0 100px;
+-webkit-border-radius:100px 0 0 100px;
+-moz-border-radius:100px 0 0 100px;
+-o-border-radius:100px 0 0 100px;
+-ms-border-radius:100px 0 0 100px;
+border:0px solid transparent;
+border-top:100px solid #345;
+border-left:100px solid #345;
+}
+/*右半圆*/
+.circle1-6{width:0px;height:100px;
+border-radius:0 100px 100px 0;
+-webkit-border-radius:0 100px 100px 0;
+-o-border-radius:0 100px 100px 0;
+-ms-border-radius:0 100px 100px 0;
+-moz-border-radius:0 100px 100px 0;
+border:0px solid transparent;
+border-right:100px solid #100;
+border-bottom:100px solid #100;
+}
+
+/*左上角的四分之一圆*/
+.circle1-7{width:100px;height:0px;
+border-radius:100px 0 0 0;
+-webkit-border-radius:100px 0 0 0;
+-moz-border-radius:100px 0 0 0;
+-o-border-radius:100px 0 0 0;
+-ms-border-radius:100px 0 0 0;
+border:0px solid transparent;
+border-top:100px solid #924;
+}
+/*右半个四分之一圆*/
+.circle1-8{width:0px;height:100px;
+border-radius:0 100px 0 0;
+-webkit-border-radius:0 100px 0 0;
+-moz-border-radius:0 100px 0 0;
+border:0px solid transparent;
+border-right:100px solid #578;
+}
+/*下半个四分之一圆*/
+.circle1-9{width:0px;height:100px;
+border-radius:0 0 0 100px;
+-webkit-border-radius:0 0 0 100px;
+-moz-border-radius:0 0 0 100px;
+border:0px solid transparent;
+border-left:100px solid #f81;
+}
+/*左半个四分之一圆*/
+.circle1-10{width:100px;height:0px;
+border-radius:0 0 100px 0;
+-webkit-border-radius:0 0 100px 0;
+-moz-border-radius:0 0 100px 0;
+border:0px solid red;
+border-bottom:100px solid #185;
+}
+
+.hint1{width:180px;height:100px;border-radius:30px;background:purple;position:relative;}
+.hint1:after{content: "";border: 0 solid transparent; 
+border-bottom:25px solid purple;
+-moz-border-radius:0 0 0 200px;
+-webkit-border-radius:0 0 0 200px;
+border-radius:0 0 0 200px;
+width:40px;height:40px;
+-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg); 
+-ms-transform: rotate(-90deg); -o-transform: rotate(-90deg);
+position:absolute;top:85px;}
+
+.hint2{width:180px;height:120px;border-radius:180px/120px;background:#f12;position:relative;}
+.hint2:after{content: "";border: 0 solid transparent; 
+border-bottom:25px solid #f12;
+-moz-border-radius:0 0 0 200px;
+-webkit-border-radius:0 0 0 200px;
+border-radius:0 0 0 200px;
+width:40px;height:40px;
+-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg); 
+-ms-transform: rotate(-90deg); -o-transform: rotate(-90deg);
+position:absolute;top:85px;left:5px;}
+
+.jiaonang1{width:250px;height:100px;background:#ec2;
+border-radius:50px;}
+.jiaonang2{width:100px;height:250px;background:#ec2;
+border-radius:50px;}
+.jiaonang3{width:100px;height:150px;background:#ec2;
+border-radius:50px 50px 0 0px;}
+.jiaonang4{width:100px;height:150px;background:#ec2;
+border-radius:0 0 50px 50px;}
+
+.heart{width:100px;height:150px;background:red;
+border-radius:50px 50px 0 0;
+-moz-transform:rotate(45deg);
+-webkit-transform:rotate(45deg);
+position:relative;
+}
+.heart:after{width:100px;height:150px;background:red;
+border-radius:50px 50px 0 0;
+-moz-transform:rotate(-90deg);
+-webkit-transform:rotate(-90deg);
+position:absolute;
+content:"";
+top:26px;
+left:-25px;
+}
+
+.test{width:300px; padding:30px 20px; border:5px solid #beceeb; position:relative;}
+.test span{width:0; height:0; font-size:0; overflow:hidden; position:absolute;}
+.test span.bot{
+    border-width:20px; 
+    border-style:solid dashed dashed; 
+    border-color:#beceeb transparent transparent; 
+    left:80px; 
+    bottom:-40px;
+}
+.test span.top{
+    border-width:20px; 
+    border-style:solid dashed dashed; 
+    border-color:#ff1 transparent transparent; 
+    left:80px; 
+    bottom:-33px;
+}
+.baidu{height:40px;padding:30px 50px;border:2px solid #000;position:relative;}
+.baidu span{width:0px height:0px;position:absolute;}
+.baidu .left{
+border:10px solid transparent;
+border-left-color:#000;
+left:100px;top:18px; }
+.baidu .right{
+	border:10px solid transparent;
+	border-left-color:#fff;
+	left:98px;
+	top:18px;
+	}
+
+
+</style>
+</head>
+<body>
+<div class = "square"></div>
+<div class = "rectangle"></div>
+<div class = "triangle1"></div>
+<div class = "triangle2"></div>
+<div class = "triangle3"></div>
+<div class = "triangle4"></div>
+<div class = "triangle5"></div>
+<div class = "triangle6"></div>
+<div class = "triangle7"></div>
+<div class = "triangle8"></div>
+<div class = "triangle"></div>
+<div class = "test1"></div>
+<div class = "test2"></div>
+
+<div id = "star-five"></div>
+
+<div class = "single"></div>
+
+<div class = "trapezoid"></div>
+<div class = "parallelogram"></div>
+
+<div class = "circle"></div>
+<div class = "circle1-1"></div>
+<div class = "circle1-2"></div>
+<div class = "circle1-3"></div>
+<div class = "circle1-4"></div>
+<div class = "circle1-5"></div>
+<div class = "circle1-6"></div>
+<div class = "circle1-7"></div>
+<div class = "circle1-8"></div>
+<div class = "circle1-9"></div>
+<div class = "circle1-10"></div>
+
+<div class = "hint1"></div>
+<div class = "hint2"></div>
+
+<div class = "jiaonang1"></div>
+<div class = "jiaonang2"></div>
+<div class = "jiaonang3"></div>
+<div class = "jiaonang4"></div>
+<div class = "jiaonang5"></div>
+
+<div class = "heart"></div>
+
+<div class = "baidu">
+<span class="left"></span>
+<span class="right"></span>
+</div>
+
+<div class="test">
+    <span class="bot"></span>
+    <span class="top"></span>
+    CSS “边框法”实现气泡对话框效果二
+</div>
+</body>
+</html>

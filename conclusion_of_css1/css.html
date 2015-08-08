@@ -1,0 +1,639 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 strict //EN" "http://www.w3.org/TR/xhtml/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8"></meta>
+<title>燕十八教程之css课程总结</title>
+<link href = "css.css" type = "text/css" rel = "stylesheet" >
+<script src = "css.js" style = "text/javascript" charset = "utf-8"></script>
+</head>
+
+<body>
+	<div id = "container">
+		<ul class = "title">
+			<li class = "active">div布局</li>
+			<li>盒模型</li>
+			<li>css</li>
+			<li>HTML语义标签</li>			
+		</ul>
+		<div id = "content">
+			<div id = "className" class = "class1" >
+				<li>
+					<b>课时1</b>&nbsp&nbsp 了解html
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>什么是HTML:超文本标记语言（Hyper Text Markup Language）,是一种文本语言。</p>
+					<h2>课后作业：.html、.htm、.shtml后缀的区别？</h2>
+					</br>
+					<p>答：HTM其实本质上和HTML一样。只是htm为了满足DOS仅能识别8+3的文件名而已，因为一些老的系统(win32)不能识别四位文件名（也就是.后面的那一串东西）微软的IE能自动识别和打开这些文件。
+						   shtml是一种基于SSI技术的文件，也就是Server Side Include--SSI 服务器端包含指令，一些Web Server如果有SSI功能的话就会对shtml文件特殊招待，服务器会先扫一次shtml文件看没有特殊的SSI指令存在，如果有的话就按Web Server设定规则解释SSI指令，解释完后跟一般html一起调去客户端。   
+						   他们3者的关系就是：前两种都是客户端的。浏览器直接渲染。而SHTML是需要去服务器端先解释下，再和html或是htm一起解释</p>
+				</ul>
+				<li>
+					<b>课时2</b>&nbsp&nbsp 开发环境准备
+				</li>
+				<ul class = "class2" >
+				</ul>
+				<li>
+					<b>课时3</b>&nbsp&nbsp 认识html的组成结构
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br><p>1.html的基本构成：
+						</br>	&lt !DOCTYPE &gt
+						</br>	&lt html &lt
+						</br>	&lt head &gt
+						</br>	&lt /head &gt
+						</br>	&lt body &gt
+						</br>	&lt /body &gt
+						</br>	&lt /html &gt
+
+					</br>2.DOCTYPE规定文档的类型，其有三种类型：
+					</br>	 第一种：最strict的：&lt!DOCTYPE html PUBLIC "-//W3//DTD XHTML1.0 Strict//EN"
+							&nbsp "http://wwww.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" &gt
+					</br> 	第二种:过渡型的（HTML4.01）:&lt !DOCTYPE html PUBLIC "-W3//DTD XHTML1.0 Transitional //EN"
+							&nbsp "http://www.w3.org/TR/xhtml1/DTD/xhtml1-tranisitional.dtd" &gt
+					</br>	第三种:框架型的：&lt !DOCTYPE html PUBLIC "-//W3//DTD XHTML1.0 Frameset//EN"
+							&nbsp "http://www.w3.org/TR/xhtml/DTD/xhtml1-frameset.dtd" &gt
+					</p>
+					<h2>课后作业：</h2>
+					<p>
+					</br>1.html的发展历史
+					</br>答：超文本标记语言（第一版）——在1993年6月作为互联网工程工作小组（IETF）工作草案发布（并非标准）：
+							</br>HTML 2.0——1995年11月作为RFC 1866发布，在RFC 2854于2000年6月发布之后被宣布已经过时
+							</br>HTML 3.2——1997年1月14日，W3C推荐标准
+							</br>HTML 4.0—1997年12月18日，W3C推荐标准
+							</br>HTML 4.01（微小改进）——1999年12月24日，W3C推荐标准
+							</br>HTML 5的第一份正式草案已于2008年1月22日公布，仍继续完善
+							</br>ISO/IEC 15445:2000（“ISO HTML”）——2000年5月15日发布，基于严格的HTML 4.01语法，是国际标准化组织和国际电工委员会的标准。
+					</br>2.html与xhtml的区别
+					</br>答：HTML是一种基本的WEB网页设计语言，XHTML是一个基于可扩展标记语言的标记语言，
+							看起来与HTML有些相象，只有一些小的但重要的区别，XHTML就是一个扮演着类似HTML的角色的可扩展标记语言（XML），
+							所以，本质上说，XHTML是一个过渡技术，结合了部分XML的强大功能及大多数HTML的简单特性。
+					</br>3.知道doctype有几种
+					</br>答：有三种。doctype声明意义的重要哦：document是告诉浏览器按照哪种方式渲染网页的。因为前面提到了html的发展中，掺杂了许多浏览器厂商的竞争。
+						 为了商业化运作，他们恶意制造了各自浏览器渲染（解释）html的方式，造成各自的渲染（解释）效果不同（不兼容）。
+						 如果，你明确告诉浏览器按什么方式渲染。会减少许多不兼容性。也就是，少了不少bug。	 
+					</p>				
+				</ul>
+				<li>
+					<b>课时4</b>&nbsp&nbsp 网页布局之切豆腐
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					<p>布局规律：先观察，用div来占块，从上到下，从左到右，从大到小。
+					</p>
+				</ul>
+				<li>
+					<b>课时5</b>&nbsp&nbsp css控制div显示
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					<p>用div布局，用css控制</p>
+					</br>
+					<h2>课后作业：</h2>
+					<p>1.css有几种引入方式
+						<br/>答：有四种方式。
+						</br>第一：链接式，在head部分加入
+						</br>&nbsp&nbsp &lt link  rel="stylesheet" type="text/css" href="my.css"/&gt,
+							    引入外部的 CSS文件。
+						</br>第二，嵌入式，在head部分加入
+						</br>&nbsp&nbsp &ltstyle type="text/css"&gt
+						</br>&nbsp&nbsp div{margin: 0;padding: 0;border:1px red solid;}
+						</br>&nbsp&nbsp &lt /style &gt
+						</br>第三，行内式，直接在页面的标签里加
+						</br>&nbsp&nbsp 　&lt div style="border:1px red solid;"&gt测试信息&lt/div&gt
+						</br>第四：导入式
+						</br>&nbsp&nbsp &lt style type="text/css" &gt
+						</br>&nbsp&nbsp  @import url(my.css);
+						</br>&nbsp&nbsp  &lt /style &gt
+						</br>2.div除了声明id，还可以用什么控制？
+						<br/>答：DIV还可以使用class控制。
+						</br>3.如何让两个div并排显示？
+						<br/>答：用float属性可以实现2个DIV并排显示。
+					</p>
+				</ul>
+				<li>
+					<b>课时6</b>&nbsp&nbsp 浮动布局
+				</li>
+				<ul class = "class2" >
+					<h2>课堂作业：</h2>
+					<p></br>1.div会独占一行，浮动起来的div会压在不浮动的div之上
+						</br>2.float:left左浮动
+						</br>3.父元素可以不设置高度值，子元素会把父元素的高度撑起来。
+					</p>
+					</br>
+					<h2>课后作业：</h2>
+					</br>
+					<p><a href = "田字格布局.html" target = "_blank" title = "田字格布局">田字格布局</a></p>
+				</ul>
+				<li>
+					<b>课时7</b>&nbsp&nbsp 清除浮动
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>可以用clear清除浮动，clear：both;(清楚两边浮动)clear:left/right;(清楚左边/右边)</p>
+				</ul>
+				<li>
+					<b>课时8</b>&nbsp&nbsp 实战首页布局
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.通常总的div的id为container</p>
+					</br>
+					<h2>课后作业：</h2>
+					<p><a href = "自学IT网首页布局.html" title = "自学IT网首页布局" target = "_blank">自学IT网首页布局</a></P>
+				</ul>
+				<li>
+					<b>课时9</b>&nbsp&nbsp 新手常犯的错误
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.不加doctype，导致低版IE，解析效果不一样
+					</br>2.id为数字，无效果
+					</br>3.文件编码要与charset声明一致（charset=utf-8）
+					</p>
+				</ul>
+			</div>
+			
+			<div class = "class1" id = "content2">
+				<li>
+					<b>课时1</b>&nbsp&nbsp 盒模型
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.盒子的外边距：margin
+					</br>2.盒子的内边距:padding
+					</br>3.盒子长 width+border-left+border-right+margin-left+margin-right+padding-left+padding-right
+					</br>4.盒子高 height+border-top+border-bottom+margin-top+margin-bottom+padding-top+padding-bottom
+					</br>5.盒子里面 文本占地的大小 等于width和height的大小 与padding margin border无关
+					</p>
+				</ul>
+				<li>
+					<b>课时2</b>&nbsp&nbsp 盒模型之margin讲解
+				</li>
+				<ul class = "class2" >
+					<h2>课堂作业：</h2>
+					</br>
+					<p>1.margin分配值时按照上右下左的顺序分配，若没有分配到则取它对边的值。					
+					</p>
+				</ul>
+				<li>
+					<b>课时3</b>&nbsp&nbsp margin首页实战
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p><a href = "首页布局.html" title = "首页布局" target = "_blank">首页布局</a></p>
+				</ul>
+				<li>
+					<b>课时4</b>&nbsp&nbsp 盒模型之border讲解
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.border,border-style,border-color
+					</br>2.<a href = "三角形.html" title = "三角形" target = "_blank">三角形</a>
+					</p>
+				</ul>
+				<li>
+					<b>课时5</b>&nbsp&nbsp css画三角形
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.画三角形:利用border，就其中三边的颜色变为transparent即可。
+					</br>2.<a href = "变色圣诞树.html" title = "变色圣诞树" target = "_blank">变色圣诞树</a>
+					</p>
+				</ul>
+				<li>
+					<b>课时6</b>&nbsp&nbsp 盒模型之padding详解
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.如果一个div的内部还有一个div，那么子div与父div的距离优先使用子div的margin,而不是父div的padding。
+						padding主要用于一个div与内部文字间的距离，而margin则主要用于布局。
+					</p>
+					</br>
+					<h2>思考题:</h2>
+					<p>若一个盒子的宽高均为100px，并且有30px的padding，背景为灰色，则灰色的面积为多少？
+					</br>答：灰色面积为160px*160px;(padding木有颜色设置)
+					</p>
+					
+				</ul>
+				<li>
+					<b>课时7</b>&nbsp&nbsp padding与背景
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.一个div加上padding后，它的可以用来填充文字的面积还是div的大小，只是padding的颜色和div的背景色一样，
+						而且padding的颜色会铺到border处，所以看起来文字与border就有一定的距离。
+					</br>2.<a href = "左图右字.html" title = "左图右字" target = "_blank">左图右字</a>
+					</p>
+				</ul>
+				<li>
+					<b>课时8</b>&nbsp&nbsp 盒模型首页实战
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.如果已经布局完成的元素,增加paddin,可能导致什么情况?如何解决?
+					</br>答：padding会导致所占空间发生变化，可能破坏布局
+					</br>&nbsp&nbsp&nbsp解决方法 为了不破坏布局 在增加padding后 要减少原来width和height的值
+					</p>
+				</ul>
+				<li>
+					<b>课时9</b>&nbsp&nbsp 盒模型总结
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>盒子模型三要素： margin（外边距）  border（边框）  padding（内边距）
+					</br>竖直方向：height + padding-top + padding-bottom + border-top + border-bottom + margin-top + margin-bottom
+					</br>水平方向：width + padding-left + padding-right + border-left + border-right + margin-left + margin-right
+					</p>
+				</ul>
+				<li>
+					<b>课时10</b>&nbsp&nbsp 利用margin实现元素居中
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>居中显示：margin:0px auto;</p>
+				</ul>
+				<li>
+					<b>课时11</b>&nbsp&nbsp margin重叠现象研究
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.margin重叠现象:相邻的普通元素（float元素除外）,上下边距并非margin的简单相加，而是取其中较大的边距值。
+					</br>2.父子方向也会有margin的重叠现象——仅限竖直方向。
+						并且，子元素的margin值并不是相对父元素设计的，它与父元素是同一级别的。
+						因此父子元素都设置了竖直方向上的margin值时，取相对较大的值。
+					</p>
+				</ul>
+				<li>
+					<b>课时12</b>&nbsp&nbsp 内联元素
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.内联元素(行内元素)：内联元素只能容纳文本或者其他内联元素，它允许其他内联元素与其位于同一行，但宽度(width)和高度(height)不起作用，
+					垂直方向的margin和padding不起作用，<b>水平方向的margin和padding起作用</b>。常见内联元素有:"a","span"。
+					</br>2.块状元素：一般是其他元素的容器，可容纳内联元素和其他块状元素，块状元素排斥其他元素与其位于同一行，宽度(width)和高度(height)起作用，
+					margin和padding也起作用。常见块状元素为div和p。
+					</br>3.块元素(block element):
+							address - 地址、blockquote - 块引用、center - 举中对齐块、dir - 目录列表、
+							div - 常用块级容易，也是CSS layout的主要标签、dl - 定义列表、fieldset - form控制组、
+							form - 交互表单、h1 - 大标题、h2 - 副标题、h3 - 3级标题、h4 - 4级标题、h5 - 5级标题、
+							h6 - 6级标题、hr - 水平分隔线、isindex - input prompt、menu - 菜单列表、
+							noframes - frames可选内容，（对于不支持frame的浏览器显示此区块内容
+							noscript - 可选脚本内容（对于不支持script的浏览器显示此内容）、ol - 排序表单、
+							p - 段落、pre - 格式化文本、table - 表格、ul - 非排序列表
+					</br>4. 内联元素(inline element):
+							a - 锚点、abbr - 缩写、acronym - 首字、b - 粗体(不推荐)、bdo - bidi override、
+							big - 大字体、br - 换行、cite - 引用、code - 计算机代码(在引用源码的时候需要)、
+							dfn - 定义字段、em - 强调、font - 字体设定(不推荐)、i - 斜体、img - 图片、
+							input - 输入框、kbd - 定义键盘文本、label - 表格标签、q - 短引用、s - 中划线(不推荐)、
+							samp - 定义范例计算机代码、select - 项目选择、small - 小字体文本、
+							span - 常用内联容器，定义文本内区块、strike - 中划线、strong - 粗体强调、sub - 下标、
+							sup - 上标、textarea - 多行文本输入框、tt - 电传文本、u - 下划线、var - 定义变量
+					</p>
+				</ul>
+				<li>
+					<b>课时13</b>&nbsp&nbsp 内联与块状转化
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.内联元素转成块状元素:display:block;块状元素转成内联元素；display:inline;
+					</br>2.display属性值
+					</br>(1)none : 此元素不会被显示。
+					</br>(2)block:此元素将显示为块级元素，此元素前后会带有换行符。
+					</br>(3)inline:默认。此元素会被显示为内联元素，元素前后没有换行符。
+					</br>(4)inline-block:行内块元素。（CSS2.1 新增的值）
+					</br>(5)list-item :此元素会作为列表显示。
+					</br>(6)run-in:此元素会根据上下文作为块级元素或内联元素显示。
+					</br>(7)compact:CSS 中有值 compact，不过由于缺乏广泛支持，已经从 CSS2.1 中删除。
+					</br>(8)marker : CSS 中有值 marker，不过由于缺乏广泛支持，已经从 CSS2.1 中删除。
+					</br>(9)table  :此元素会作为块级表格来显示（类似 &lttable&gt），表格前后带有换行符。
+					</br>(10)inline-table :此元素会作为内联表格来显示（类似 &ltable&gt），表格前后没有换行符。
+					</br>(11)table-row-group:此元素会作为一个或多个行的分组来显示（类似 &ltbody&gt）。
+					</br>(12)table-header-group :此元素会作为一个或多个行的分组来显示（类似 &lthead&gt）。
+					</br>(13)table-footer-group :此元素会作为一个或多个行的分组来显示（类似 &ltfoot&gt）。
+					</br>(14)table-row :此元素会作为一个表格行显示（类似 &ltr&gt）。
+					</br>(15)table-column-group:此元素会作为一个或多个列的分组来显示（类似 &lcolgroup&gt）。
+					</br>(16)table-column :此元素会作为一个单元格列显示（类似 &lcol&gt）
+					</br>(17)table-cell :此元素会作为一个表格单元格显示（类似 &ltd> 和 &ltth&gt）
+					</br>(18)table-caption:此元素会作为一个表格标题显示（类似 &lcaption&gt）
+					</br>(19)inherit :规定应该从父元素继承 display 属性的值。
+					</p>
+				</ul>
+			</div>
+			
+			<div  class = "class1" id = "content3">
+				<li>
+					<b>课时1</b>&nbsp&nbsp css控制段落
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.首行文本缩进:text-indent
+					</br>2.文字方向:text-align
+					</br>3.文本装饰线text-decoration(IE、Chrome 或 Safari 不支持 "blink" 属性值。)
+					</br>4.字母间距:letter-spacing
+					</br>5.<b>white-space:</b>
+					</br>&nbsp&nbsp	normal  :　 默认值。默认处理方式。文本自动处理换行。假如抵达容器边界内容会转到下一行 
+					</br>&nbsp&nbsp	pre     :　 换行和其他空白字符都将受到保护。这个值需要IE6+或者 !DOCTYPE 声明为 
+										standards-compliant mode 支持。如果 !DOCTYPE 声明没有指定为 standards-compliant mode，
+										此属性可以使用，但是不会发生作用。结果等同于 normal 。参阅 pre 对象 
+					</br>&nbsp&nbsp	nowrap  :　强制在同一行内显示所有文本，直到文本结束或者遭遇 br 对象。参阅 noWrap 属性 
+
+					</p>
+				</ul>
+				<li>
+					<b>课时2</b>&nbsp&nbsp css控制文字大小字体及颜色
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.字体颜色：color;
+					</br>2.font-style:字体形式(italic(斜体),norm al)
+					</br>3.font-weight:字体粗细
+					</br>4.font-size:字体大小
+					</br><b>5.行高：line-height</b>
+					</br>6.font-family:字体(Simsum(默认),SimHei(黑体))
+					</br>7.font:font-style font-weight font-size/line-height font-family;
+					</br>&nbsp&nbsp eg:font:italic bold 26px/46px "Simsum";
+					</p>
+				</ul>
+				<li>
+					<b>课时3</b>&nbsp&nbsp css字体设置技巧
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.有衬线 （黑体，一般用于重要新闻的标题）:seirf
+					</br>2.无衬线(宋体，一般用于正文)：sans-seirf
+					</br>3.自己设置的字体在客户机器上不一定有,怎显示为默认为宋体，所以设置font-family时，
+					按照:
+					</br>&nbsp&nbsp （1）设置无衬线字体时："你的字体","微软雅黑","黑体",sans-seirf;
+					</br>&nbsp&nbsp （2）设置有衬线字体时:"你的字体","新宋","宋体",serif
+					
+					</p>
+				</ul>
+				<li>
+					<b>课时4</b>&nbsp&nbsp css设置背景图片
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.background-image &gt background-color;
+					</br>2.background-attachment :  scroll默认值 滚动 fiixed背景固定
+					</br>3.	background-color : transparent 默认值 背景透明  
+					</br>4.	background-color：颜色  背景颜色
+					</br>5.	background-image：none默认值 无背景 url（背景路径）背景图片
+					</br>6.	background-position：left  top center right  可以选择背景所在的位置
+					</br>7.	background-repeat：repeat-x X轴平铺 repeat-y  Y轴平铺 no-repeat  背景图片不重复
+					</br><b>为了防止背景图片显示不出来，一般既设置背景图片又设置背景颜色。</b>
+					
+					</p>
+				</ul>
+				<li>
+					<b>课时5</b>&nbsp&nbsp 精确控制背景图片位置
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<P>1.1张背景图做多个元素的背景
+					</br>2.背景图片默认对其方式是:div左上角与jpg左上角对齐
+					</br>3.计算机的左上角是原点,向右是x轴正向，向下是y轴正向。
+					</p>
+				</ul>
+				<li>
+					<b>课时6</b>&nbsp&nbsp css选择器
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p> 第一 id   #xxx
+					</br>	第二 class   .xxx
+					</br>	第三 标签  div  p  body 等
+					</br>	第四 后代  div p{}    .a .b{} 等 表示所有空格后面的选择器生效
+					</br>	第五 子代   div > p  只有大于号后面的选择器生效 不继承下去了
+					</br>	第六 群组选择   div,p,a{} 记住 是逗号 不是小数点，表示div p a标签都生效
+					</br>	第七 伪选择器  比如 a:link  让鼠标放上去的时候生效
+					</br>	第八 通用选择器 比如 p *{}  表示p标签后面的所有标签都生效
+					</br>	第九 相邻选择器  比如 p+div{}  表示 p后面的第一个div生效  后面的 都无效
+					</br>	第十 属性选择器  比如 p[title='aa'] {} 表示 p标签里面是否有title等于aa的属性 有的话就生效
+					</br><b>可以多个选择器选择同一个元素</b>
+					</p>
+				</ul>
+				<li>
+					<b>课时7</b>&nbsp&nbsp css优先级
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>定位范围越精确的优先级越大,直接写在标签里的的style优先级最高，然后是id > class >tag
+</p>
+				</ul>
+				<li>
+					<b>课时8</b>&nbsp&nbsp css4种引入方式
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>
+					1.放在标签内（行内式引用）
+					&lt p style="color:red; font-size:12px;" &gt www.zixue.it &lt /p &gt
+					</br>2.放在head 里面（内嵌式引用）
+					&ltstyle type="text/css"&gt
+					&lt/style&gt
+					</br>3.也是写在head里面的不过很短小。前提是要有个。css的文件才可以链接（链接式引用）
+					&ltlink rel="stylesheet" type="text/css" href=".css" /&gt
+					</br>注意：1.&ltlink/&gt里面的代码要准备无误。2.href 里面的路径要对的上，不然。没效果。
+					</br>4.导入式 也是head里面。（导入式引用）
+					</br>&nbsp&nbsp&ltstyle type="text/css"&gt
+					</br>&nbsp&nbsp@import url("css/base.css");
+					</br>&nbsp&nbsp&lt/style&gt
+					</br>&nbsp&nbsp注意url后面的路径问题。
+					</br>5.CSS主要用到两种方式link和@import的区别
+					</br><b>差别1：</b>老祖宗的差别。link属于XHTML标签，而@import完全是CSS提供的一种方式。
+						link标签除了可以加载CSS外，还可以做很多其它的事情，比如定义RSS，
+						定义rel连接属性等，@import就只能加载CSS了。
+					</br><b>差别2：</b>加载顺序的差别。当一个页面被加载的时候（就是被浏览者浏览的时候），
+					link引用的CSS会同时被加载，而@import引用的CSS会等到页面全部被下载完再被加载。
+					所以有时候浏览@import加载CSS的页面时开始会没有样式（就是闪烁），
+					网速慢的时候还挺明显（梦之都加载CSS的方式就是使用@import，我一边下载一边浏览梦之都网页时，
+					就会出现上述问题）。
+					</br><b>差别3：</b>兼容性的差别。由于@import是CSS2.1提出的所以老的浏览器不支持，
+					@import只有在IE5以上的才能识别，而link标签无此问题。
+					</br><b>差别4：</b>当使用javascript控制dom去改变样式的时候，只能使用link标签，因为@import不是dom可以控制的。
+					</p>
+				</ul>
+				<li>
+					<b>课时9</b>&nbsp&nbsp css初始化
+				</li>
+				<ul class = "class2" >
+					<h2></h2>
+					</br>
+					<p>1.相同元素，如li在不同浏览器下显示效果稍有不同（因为浏览器对各元素的margin,border,font-size等略有不同）
+						为杜绝这种情况，我们通过css强制让所有元素的属性值都一样。
+					</br>2.<a href = "http://www.zixue.it/thread-9779-1-2.html" title = "初始化脚本" target = "_blank">淘宝、腾讯、网易初始化脚本</a>
+					</p>
+				</ul>
+			</div>
+			
+			<div  class = "class1" id = "content4">
+				<li>
+					<b>课时1</b>&nbsp&nbsp HTML学习思维导图
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.DTD、head、body是html的重要组成部分。从整体划分网页DVI +css。
+					</br>2.<a href = "http://www.zixue.it/forum.php?mod=viewthread&tid=10623&extra=" target = "_blank" >HTML学习思维导图</a>
+					</p>
+				</ul>
+				<li>
+					<b>课时2</b>&nbsp&nbsp h标签与p标签
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记:</h2>
+					</br>
+					<p>1.h标签 一般出现在 新闻等作为标题
+					</br>2.P标签 作为段落文字的使用 
+					</p>
+
+				</ul>
+				<li>
+					<b>课时3</b>&nbsp&nbsp img标签
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记:</h2>
+					</br>
+					<p>1.&lt img src = "图片地址" alt = "图片丢失时显示的文字" title = "鼠标放上去显示" &gt
+					</br>2.双闭合标签：
+						 &lthtml&gt&lthead&gt&lttitle&gt&ltbody&gt&lttable&gt&lttr&gt&lttd&gt&ltspan&gt&ltp&gt
+						&ltform&gt&lth1&gt&lth2&gt&lth3&gt&lth4&gt&lth5&gt&lth6&gt&ltobject&gt&ltstyle&gt&ltb&gt&ltu&gt
+						&ltstrong&gt&lti&gt&ltdiv&gt&lta&gt&ltscript&gt&ltcenter&gt
+					</br>&nbsp	单闭合标签：
+						&ltbr&gt&lthr&gt&ltimg&gt&ltinput&gt&ltparam&gt&ltmeta&gt&ltlink&gt
+					</p>
+				</ul>
+				<li>
+					<b>课时4</b>&nbsp&nbsp img到底是块状还是内联
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.内联元素不换行且不可以设置宽高，块状元素独占一行。
+					</br>2.img是特殊的内联元素，又是替换元素，替换元素能够设置宽高（但不换行）
+					</br>3.替换元素：替换元素是浏览器根据其标签的元素与属性来判断显示具体的内容。
+					</br>4.要去除img的margin,border值可以先将img转成块状元素,再将margin、border值设为0.
+					</br>5.(X)HTML中的&ltimg&gt、&ltinput&gt、&lttextarea&gt、&ltselect&gt、&ltobject&gt都是替换元素，这些元素都没有实际的内容。
+					</br>&nbsp&nbsp例如：&ltinput /&gt type="text" 的是，这是一个文本输入框，换一个其他的时候，浏览器显示就不一样
+					</br>6.(X)HTML 的大多数元素是不可替换元素，他们将内容直接告诉浏览器，将其显示出来。
+					</p>
+				</ul>
+				<li>
+					<b>课时5</b>&nbsp&nbsp 有序列表和无序列表
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.无序列表：（ul）一般为了确保各个浏览器的兼容性，将list-style-type均设为none。
+					</br>2.有序列表：（ol）一般军用背景图片（background:url("地址")）作为列表图片。
+					</p>
+				</ul>
+				<li>
+					<b>课时6</b>&nbsp&nbsp 整齐的表格
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.表格组成：table , thead ,tbody ,tr (行),td (列)
+					</br>2.表格的单元格之间默认是有间距的,通过border-collapse:collapse(融合);默认是separate(分离的)。
+					</br>3.colspan:占多少列;rowspan:占多少行;
+					</br>4.<a href = "课程表.html"  title = "课程表" target = "_blank">课程表</a>
+					</p>
+				</ul>
+				<li>
+					<b>课时7</b>&nbsp&nbsp 超链接
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.超链接标签a(内联元素) &nbsp &lt a href = "链接的网址" target = "_blank(显得网页)"
+					title = "鼠标放上去的显示"&gt
+					</br>2.href是超级链接的地址属性，#是超级链接的地址值，而href=“#"是代表目前这个a标签的超级链接为空链接
+					</p>
+					</br>
+					<h2>课后作业：</h2>
+					</br>
+					<p>href="http://www.xxx.com/index.html/#q2"的#q2是什么意思？
+					</br>答：标示网页index.html的q2位置处，浏览器读取这个URL后，会自动将q2位置滚动至可视区域。</p>
+				</ul>
+				
+				<li>
+					<b>课时8</b>&nbsp&nbsp 锚点
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.在一个较大的页面中会用到锚点:&lt a href = "锚点位置，例如#p1" &gt p1锚点&lt /a &gt 
+					</br>&nbsp&nbsp相对应的需要连接到的地方：&lt a name = "p1" &gt </p>
+				</ul>
+				<li>
+					<b>课时9</b>&nbsp&nbsp 伪类
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.css允许针对a的状态设置各自的css特性，叫做css的伪类：
+					</br>&nbsp&nbsp(1)普通链接：a或a:link
+					</br>&nbsp&nbsp(2)鼠标放上：a:hover
+					</br>&nbsp&nbsp(3)鼠标点击未松手:a:active(可以显示的时间较短，一般不用)
+					</br>&nbsp&nbsp(4)已访问的链接:a:visited
+					</br>2.写的时候一定要按照LHVA的顺序来写
+					</p>
+				</ul>
+				<li>
+					<b>课时10</b>&nbsp&nbsp 字符实体
+				</li>
+				<ul class = "class2" >
+					<h2>课堂笔记：</h2>
+					</br>
+					<p>1.在html开发中，有一些字符不适合直接写出，如:"<",">"
+					</br>2.一般的格式："&" + 实体名 + ";";
+					</br>3.常见符号:
+					</br>&nbsp&nbsp; 空格:&amp;nbsp &nbsp;
+					</br>&nbsp&nbsp; 小于号:&amp;lt  &lt;
+					</br>&nbsp&nbsp; 大于号:&amp;gt &gt;
+					</br>&nbsp&nbsp; 和号:&amp;amp &amp;
+					</br>&nbsp&nbsp; 引号:&amp;quot &quot;
+					</br>&nbsp&nbsp; 撇号:&amp;apos &apos;
+					</br>&nbsp&nbsp; 分:&amp;cent &cent;
+					</br>&nbsp&nbsp; 磅:&amp;pound &pound;
+					</br>&nbsp&nbsp; 日圆:&amp;yen	&yen; 
+					</br>&nbsp&nbsp; 节:&amp;sect	&sect;
+					</br>&nbsp&nbsp; 版权:&amp;copy &copy; 
+					</br>&nbsp&nbsp; 注册商标:&amp;reg &reg; 
+					</br>&nbsp&nbsp; 乘号:&amp;times &times; 
+					</br>&nbsp&nbsp; 除号:&amp;divide &divide;
+					</p>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

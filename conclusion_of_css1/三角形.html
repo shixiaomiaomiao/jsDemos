@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD/XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv = "Content-Type" content = "text/html ; charset = utf-8"></meta>
+<title>三角形</title>
+<style>
+#div1 {width:0px;margin:20px auto;border:80px solid red;border-color:red yellow green blue;}
+</style>
+<script>
+var array = ['top','right','bottom','left'];
+var arrayColor = ['red','yellow','green','blue'];
+var j = 0;
+window.onload = function()
+{
+	var oDiv = document.getElementById('div1');
+	setInterval (function()
+	{
+		j = j % 4;
+		for (var i = 0 ; i < array.length ; i++)
+		{
+			var value = "border-" + array[i] + "-color" ;
+			oDiv.style[value] = 'transparent';
+		}
+		var value2 = "border-" + array[j] + "-color" ;
+		oDiv.style[value2] = arrayColor[j];
+		j += 1;
+	},1000)
+}
+
+</script>
+</head>
+<body>
+<div id = "div1">
+</div>
+</body>
+</html>

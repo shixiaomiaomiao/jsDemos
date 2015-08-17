@@ -156,4 +156,5 @@ window.onload = function()
 			
 	}
 	
+	oTxt[0].style.display = "block";	
 }

@@ -1,13 +1,13 @@
 *{ padding:0px; margin:0px; }
 ul , li { list-style-type : none;}
-#container { width:843px ; border:1px solid black;margin:10px auto;}
-.title { width: 843px; height:42px;background:#333333;display:block;overflow:hidden;}
+#container { width:842px ; border:1px solid black;margin:10px auto;}
+.title { width: 842px; height:42px;background:#333333;display:block;overflow:hidden;}
 .title li {width:85px;height:40px;float :left;color:white;text-align:center;padding:10px;font-size:14px;display:block;}
 .title .active{background:#cccccc;color:#333333;cursor:pointer;}
 
 #className {display:block;}
-.class1 {width:750px ; display:none;}
+.class1 {width:842px ; display:none;}
 
-.class1 li {width:823px; height:18px; background:#111111;padding:8px; color: #CCCCCC;border:1px solid #333333;font-size:14px;}
+.class1 li {width:822px; height:18px; background:#111111;padding:8px; color: #CCCCCC;border:1px solid #333333;font-size:14px;}
 
 .class2 {width:730px;background:#CCCCCC; display:none;padding:10px;color:#111111;text-decoration:blink }

@@ -1,4 +1,7 @@
 *{ padding:0px; margin:0px; }
+body {
+  background:#999;
+}
 ul , li { list-style-type : none;}
 #container { width:842px ; border:1px solid black;margin:10px auto;}
 #content1 {display :block;}

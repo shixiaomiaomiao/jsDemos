@@ -8,6 +8,6 @@ ul , li { list-style-type : none;}
 #className {display:block;}
 .class1 {width:842px ; display:none;}
 
-.class1 li {width:822px; height:18px; background:#111111;padding:8px; color: #CCCCCC;border:1px solid #333333;font-size:14px;}
+.class1 li {width:824px; height:18px; background:#111111;padding:8px; color: #CCCCCC;border:1px solid #333333;font-size:14px;}
 
-.class2 {width:730px;background:#CCCCCC; display:none;padding:10px;color:#111111;text-decoration:blink }
+.class2 {width:822px;background:#CCCCCC; display:none;padding:10px;color:#111111;text-decoration:blink }

@@ -80,9 +80,9 @@ window.onload = function()
 	var oTxtLi = oContent.getElementsByTagName("li");
 	
 	var oContentUl = oContent.getElementsByTagName('ul');
-	var oSkin = document.getElementById("skin");
+	/*var oSkin = document.getElementById("skin");
 	var oSkinUl = oSkin.getElementsByTagName('ul')[0];
-	var oSkinLi = oSkin.getElementsByTagName('li');
+	var oSkinLi = oSkin.getElementsByTagName('li');*/
 	//选出每个选项卡页面中的div,他们共有class名为class1,父元素均为id为content的元素
 	var oTxt = oContent.getElementsByTagName("div");
 	//对每个选项卡页面中所有的li标题添加事件。
